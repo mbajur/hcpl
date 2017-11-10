@@ -1,0 +1,79 @@
+.container
+  .row
+    .col-9.main-content
+      .main-content-inner
+        .main-content-nav
+          ul.list-inline.mb-0
+            li.list-inline-item
+              a(href="#") Popularne
+
+            li.list-inline-item
+              a.active(href="#") Najnowsze
+
+            li.list-inline-item
+              a(href="#") Zapisane
+
+        .main-content-heading
+          | Crater.io: the latest programming news lands here first!
+
+        ul.list-unstyled.posts-list
+          - 25.times do
+            li.posts-item
+              .media
+                a.btn.btn-outline-secondary.posts-item-vote
+                  = rand(20)
+
+                a.posts-item-thumb(href="#" style="background-image: url(https://a.thumbs.redditmedia.com/iIuRNbF0zyNoFrJFzW-FW2eSV5Av5rEL7fbD7moict0.jpg)")
+
+                .media-body.posts-item-content
+                  h3.posts-item-title
+                    a(href="#") Intro to Framer: Design and code animations with Framer
+
+                  ul.list-inline.posts-item-meta
+                    li.list-inline-item
+                      a.posts-item-avatar(href="#")
+                        = image_tag 'https://secure.gravatar.com/avatar/c2a71f10051e9666ac3732daf0ab18cb?size=200&default=mm'
+
+                    li.list-inline-item.mr-3
+                      a(href="#") mbajur
+
+                    li.list-inline-item.mr-3
+                      | 15 godzin temu
+
+                    li.list-inline-item
+                      a(href="#") 3 komentarze
+
+
+    .col.main-sidebar
+      form
+        .form-group
+          input.form-control(type="search" placeholder="Szukaj...")
+
+      ul.list-inline
+        li.list-inline-item.main-sidebar-tag
+          a.btn.btn-outline-secondary.btn-sm(href="#") Wszystkie kategorie
+
+        li.list-inline-item.main-sidebar-tag
+          a.btn.btn-outline-secondary.btn-sm(href="#") Ogłoszenia
+
+        li.list-inline-item.main-sidebar-tag
+          a.btn.btn-outline-secondary.btn-sm(href="#") Video
+
+        li.list-inline-item.main-sidebar-tag
+          a.btn.btn-outline-secondary.btn-sm(href="#") Wydawnictwa
+
+      .main-sidebar-events
+        h3.mt-4 Nadchodzące wydarzenia
+        ul.list-unstyled
+          - 3.times do
+            li
+              .main-sidebar-events-meta
+                | Za 2 dni - Kraków
+              h4
+                | Benefit na FNB Kraków
+
+            li
+              .main-sidebar-events-meta
+                | Za 2 dni - Kraków
+              h4
+                | Wide smiles #4: Appraise / Bright Light / VxR / Protein
