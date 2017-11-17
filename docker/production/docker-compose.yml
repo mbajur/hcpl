@@ -1,6 +1,6 @@
 web:
-  build: ../../
-  dockerfile: docker/production/Dockerfile
+  build: .
+  dockerfile: Dockerfile
   volumes:
     - hcpl-production-assets:/app/public/assets
     - /home/mbajur/hcpl/shared:/shared
@@ -23,8 +23,8 @@ web:
     - 127.0.0.1:3000:3000
 
 sidekiq:
-  build: ../../
-  dockerfile: docker/production/Dockerfile
+  build: .
+  dockerfile: Dockerfile
   cpu_quota: 100000
   mem_limit: 900M
   restart: always
