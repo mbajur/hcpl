@@ -75,7 +75,7 @@ task :deploy do
     on :launch do
       in_path(fetch(:current_path)) do
         comment %{"Building docker container."}
-        command %{docker-compose -f docker/production/docker-compose.yml build}
+        command %{docker-compose -f docker-compose.production.yml build}
         # command %{mkdir -p tmp/}
         # command %{touch tmp/restart.txt}
       end
