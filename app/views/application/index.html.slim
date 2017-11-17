@@ -17,17 +17,18 @@
           | Crater.io: the latest programming news lands here first!
 
         ul.list-unstyled.posts-list
-          - 25.times do
+          - Post.popular.each do |post|
             li.posts-item
               .media
-                a.btn.btn-outline-secondary.posts-item-vote
-                  = rand(20)
+                a.btn.btn-outline-secondary.posts-item-vote(title="Score: #{post.popularity}")
+                  = post.votes_count
 
                 a.posts-item-thumb(href="#" style="background-image: url(https://a.thumbs.redditmedia.com/iIuRNbF0zyNoFrJFzW-FW2eSV5Av5rEL7fbD7moict0.jpg)")
 
                 .media-body.posts-item-content
                   h3.posts-item-title
-                    a(href="#") Intro to Framer: Design and code animations with Framer
+                    a(href=post.link)
+                      = post.title
 
                   ul.list-inline.posts-item-meta
                     li.list-inline-item
@@ -38,10 +39,10 @@
                       a(href="#") mbajur
 
                     li.list-inline-item.mr-3
-                      | 15 godzin temu
+                      | #{time_ago_in_words(post.created_at)} ago
 
                     li.list-inline-item
-                      a(href="#") 3 komentarze
+                      a(href="#") #{post.comments_count} komentarze
 
 
     .col.main-sidebar

@@ -1,0 +1,48 @@
+= content_for :content_body do
+  ul.list-unstyled.posts-list
+    = render @post, auto_show: true
+
+  - if @post.description.present?
+    .post-body
+      = simple_format(@post.description)
+
+  .post-comment-form
+    = simple_form_for @comment do |f|
+      = f.hidden_field :post_id
+      .form-group
+        = f.input :body, label: false, input_html: { class: 'form-control', placeholder: 'Wpisz swój komentarz tutaj...', rows: 1 }
+
+      .form-group
+        = f.button :submit, class: 'btn btn-outline-secondary btn-sm'
+
+  .post-comments
+    header.post-comments-header
+      .row
+        .col-4
+          h2 #{@post.comments_count} komentarzy
+
+        .col
+          ul.nav.justify-content-end
+            li.nav-item: a.nav-link.active(href="#") Najlepsze
+            li.nav-item: a.nav-link(href="#") Najgorsze
+            li.nav-item: a.nav-link(href="#") Najnowsze
+            li.nav-item: a.nav-link(href="#") Najstarsze
+
+    ul.post-comments-list.list-unstyled
+      - @post.comments.each do |comment|
+        li.post-comment
+          .post-comment-inner
+            header.post-comment-header
+              span.post-comment-header-main
+                a(href="#")
+                  = image_tag 'https://secure.gravatar.com/avatar/c2a71f10051e9666ac3732daf0ab18cb?size=200&default=mm', height: 12
+                  | mbajur
+              span.post-comment-header-sub
+                | #{time_ago_in_words(comment.created_at)} temu
+
+            .post-comment-body
+              = simple_format comment.body
+
+            footer.post-comment-footer
+              .post-comment-vote-controls
+              span.post-comment-vote-points 10 punktów

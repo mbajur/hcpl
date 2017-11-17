@@ -1,0 +1,6 @@
+= content_for :content_heading do
+  .text-center Wyszukiwanie: <em>#{params[:q]}</em>
+
+= content_for :content_body do
+  ul.list-unstyled.posts-list
+    = render @posts

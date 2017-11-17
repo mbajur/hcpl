@@ -1,0 +1,60 @@
+= content_for :content_body do
+  .p-4
+    h1.h4.mb-3
+      | Dodawanie posta
+
+    p.mb-5
+      | Wyślij link albo tekst aby rozpocząć dyskusję. Sprawdź wytyczne aby mieć
+      |  pewność, że to co wrzucasz jest odpowiednie dla tej społeczności.
+
+    = simple_form_for @post, url: create_post_path, wrapper: :horizontal_form do |f|
+      / .row
+        / .col-9
+      = f.input :link, as: :post_link, placeholder: 'http://...', autofocus: true
+      / .col-3
+      /   label.control-label &nbsp;
+      /   a.btn.btn-outline-secondary.btn-block(href="#") Pobierz tytuł
+
+      = f.input :title, label:  'Tytuł posta', required: false
+      = f.input :tag_list, required: false
+      = f.input :description, as: :text, placeholder: 'Niewymagany jeśli wysyłasz linka'
+
+      .form-group.row.mb-0
+        label.col-sm-3.col-form-label
+        .col-sm-9
+          = f.submit 'Dodaj post', class: 'btn btn-success'
+
+  javascript:
+    $(document).ready(function() {
+      var isFetchingTitle = false
+
+      $('#fetch-post-title').click(function(e) {
+        e.preventDefault()
+
+        var originalText = $(this).text()
+
+        if (isFetchingTitle) { return true }
+        isFetchingTitle = true
+
+        $(this).text('Momencik...')
+        $(this).attr('disabled', 'disabled')
+
+        var req = $.post('/api/internal/v1/posts/fetch_title', {
+          link: $('#post_link').val()
+        })
+
+        req.done(function(data) {
+          $('#post_title').val(data.title)
+        })
+
+        req.fail(function(data) {
+          alert('Coś poszło nie tak. Spróbuj ponownie za chwilę.')
+        })
+
+        req.always(function(data) {
+          isFetchingTitle = false
+          $('#fetch-post-title').text(originalText)
+          $(this).removeAttr('disabled')
+        })
+      })
+    })

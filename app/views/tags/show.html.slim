@@ -1,0 +1,6 @@
+= content_for :content_heading do
+  .text-center Tag: #{@tag.name}
+
+= content_for :content_body do
+  ul.list-unstyled.posts-list
+    = render @posts

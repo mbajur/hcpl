@@ -1,0 +1,9 @@
+= content_for :content_nav do
+  = render 'index_content_nav'
+
+= content_for :content_heading do
+  = title 'Popularne w tym roku'
+
+= content_for :content_body do
+  ul.list-unstyled.posts-list
+    = render @posts

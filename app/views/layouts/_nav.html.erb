@@ -1,0 +1,45 @@
+<div class="nav-main bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="<%= root_path %>">hard-core.pl</a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-md-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Posty</a>
+          </li>
+
+          <li class="nav-item">
+            <%= active_link_to 'Wydarzenia', events_path, class: 'nav-link' %>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="https://forum.hard-core.pl" target="_blank">Forum</a>
+          </li>
+
+          <li class="nav-item">
+            <% if user_signed_in? %>
+              <a class="nav-link" href="<%= sign_out_path %>" data-method="delete" role="button">
+                Wyloguj
+              </a>
+            <% else %>
+              <a class="nav-link" href="<%= sign_in_path %>" role="button">
+                Logowanie
+              </a>
+            <% end %>
+          </li>
+        </ul>
+
+        <a href="<%= new_post_path %>" class="btn btn-outline-light ml-md-3">Dodaj post +</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <%= render './layouts/flashes' %>
+  </div>
+</div>

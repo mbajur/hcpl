@@ -1,0 +1,10 @@
+= content_for :content_nav do
+  = render 'index_content_nav'
+
+= content_for :content_heading do
+  = title 'Zapisane posty'
+
+= content_for :content_body do
+  ul.list-unstyled.posts-list
+    - @bookmarks.each do |b|
+      = render b.bookmarkable

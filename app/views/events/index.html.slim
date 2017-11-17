@@ -1,0 +1,19 @@
+= content_for :content_nav do
+  ul.list-inline.mb-0
+    li.list-inline-item
+      a.active Nadchodzące
+
+    li.list-inline-item
+      a Minione
+
+= content_for :content_body do
+  - @posts_months.each do |month, posts|
+    .events-month
+      = month.strftime('%B %Y')
+
+    ul.list-unstyled.events-list
+      - posts.each do |post|
+        = render 'events/event', post: post
+
+= content_for :sidebar do
+  = render 'events/sidebar'

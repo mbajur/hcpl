@@ -12,4 +12,20 @@
 //
 //= require rails-ujs
 //= require turbolinks
+//= require sticky-sidebar
 //= require_tree .
+
+$(document).ready(function() {
+})
+
+document.addEventListener("turbolinks:load", function() {
+  $('.dropdown-toggle').dropdown()
+
+  var sidebar = new StickySidebar('.main-sidebar', {
+    topSpacing: 0,
+    bottomSpacing: 20,
+    containerSelector: '.main',
+    innerWrapperSelector: '.main-sidebar__inner',
+    stickyClass: 'main-sidebar--affixed'
+  });
+})

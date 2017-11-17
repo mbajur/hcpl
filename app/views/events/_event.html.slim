@@ -1,0 +1,47 @@
+- auto_show = auto_show == true
+
+li.events-item
+  post-bookmark-btn(
+    post-guid=post.token
+    :bookmarked=post.user_bookmarked?(current_user).to_s
+  )
+
+  .media
+    post-vote-btn(
+      post-guid=post.token
+      :voted=post.user_voted?(current_user).to_s
+      :votes-count=post.votes_count.to_s
+    )
+
+    .media-body
+      .media
+        - if post.thumb.present?
+          a.events-item-thumb(href=post.path style="background-image: url(#{post.thumb.thumb('83x65#').url})")
+
+        .media-body.posts-item-content
+          .events-item-beginning-at
+            = time_ago_in_words post.event.beginning_at
+
+          h3.posts-item-title
+            a(href=post.link target="_blank")
+              = post.title
+
+          ul.list-inline.events-item-meta
+            - if post.event.city.present?
+              li.list-inline-item
+                a.events-item-city(href="#")
+                  = post.event.city
+
+            li.list-inline-item
+              a.posts-item-avatar(href='#')
+                - if post.user.avatar.present?
+                  = image_tag post.user.avatar.thumb('50x50#').url
+
+            li.list-inline-item.mr-3
+              a(href='#') = post.user.username
+
+            li.list-inline-item.mr-3
+              | #{time_ago_in_words(post.created_at)} ago
+
+            li.list-inline-item
+              a(href=build_post_path(post)) #{post.comments_count} komentarze

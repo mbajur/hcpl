@@ -34,10 +34,27 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'slim'
+gem 'kaminari'
+gem 'acts-as-taggable-on', github: 'mbleigh/acts-as-taggable-on'
+gem 'seed-fu', '~> 2.3'
+gem 'pg_search'
+gem 'babosa'
+gem 'authlogic'
+gem 'active_link_to'
+gem 'metainspector'
+gem 'dragonfly', '~> 1.1.3'
+gem 'simple_form'
+gem 'active_interaction', '~> 3.6'
+gem 'webpacker', '~> 3.0'
+gem "koala"
+gem 'discourse_api'
+gem 'meta-tags'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'faker'
+  gem 'dotenv-rails'
 end
 
 group :development do
@@ -51,3 +68,5 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'rails-assets-sticky-sidebar', source: 'https://rails-assets.org'

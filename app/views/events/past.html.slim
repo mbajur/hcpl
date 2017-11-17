@@ -1,0 +1,9 @@
+= content_for :content_heading do
+  = title 'Minione wydarzenia'
+
+= content_for :content_body do
+  ul.list-unstyled.posts-list
+    = render @posts
+
+= content_for :sidebar do
+  = render 'events/sidebar'
