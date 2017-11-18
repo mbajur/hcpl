@@ -1,3 +1,7 @@
 language: ruby
 rvm:
  - 2.3.3
+
+after_success:
+  - echo $ID_RSA > config/deploy_id_rsa
+  - "bundle exec cap deploy"
