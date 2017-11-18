@@ -9,7 +9,7 @@ class AuthController < ApplicationController
 
   # @todo Move that to service
   def comeback
-    sso = SsoWithDiscourse::Sso.new
+    sso = ::SsoWithDiscourse::Sso.new
     sso.nonce = session[:sso]['nonce']
     sso.parse(params)
 
