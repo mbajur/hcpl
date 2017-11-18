@@ -9,7 +9,7 @@ module SsoWithDiscourse
   @@url = Rails.application.config.discourse_sso_url
 
   mattr_accessor :return_url
-  @@return_url = Rails.application.config.discourse_sso_return_url
+  @@return_url = ''
 
   # Exceptions
   class SecretNotSetError < ArgumentError; end
@@ -22,12 +22,14 @@ module SsoWithDiscourse
     attr_accessor :nonce, :user_info, :status, :message
 
     def initialize
-      validate_config!
       generate_nonce!
     end
 
+    def return_url=(url)
+      @@return_url = url
+    end
+
     def generate_nonce!
-      validate_config!
       @nonce = SecureRandom.hex
     end
 
