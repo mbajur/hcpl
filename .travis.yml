@@ -6,5 +6,6 @@ cache: bundler
 
 after_success:
   - echo $ID_RSA > config/deploy_id_rsa
+  - echo $ID_RSA
   - cat config/deploy_id_rsa
   - "bundle exec cap production deploy"
