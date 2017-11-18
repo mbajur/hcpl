@@ -1,7 +1,7 @@
 class AuthController < ApplicationController
 
   def sign_in
-    sso = SsoWithDiscourse::Sso.new
+    sso = ::SsoWithDiscourse::Sso.new
     session[:sso] = sso
 
     redirect_to sso.request_url
