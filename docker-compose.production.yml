@@ -3,17 +3,14 @@ web:
   dockerfile: docker/production/Dockerfile
   volumes:
     - hcpl-production-assets:/app/public/assets
+    - /mnt/disk/hcpl-shared/uploads:/app/public/system
     - /home/mbajur/apps/hcpl/shared:/shared
     - /home/mbajur/apps/hcpl/shared/log:/app/log
-  # hostname: "netguru.hcpl.production.web"
   restart: always
   env_file: /home/mbajur/apps/hcpl/shared/secrets.env
   command: bundle exec puma -C config/puma.rb
   cpu_quota: 25000
   mem_limit: 800M
-  # labels:
-  #   - "mbajur.appname=hcpl"
-  #   - "mbajur.stage=production"
   links:
     - postgres
     - redis
@@ -30,13 +27,10 @@ sidekiq:
   restart: always
   env_file: /home/mbajur/apps/hcpl/shared/secrets.env
   volumes:
+  - /mnt/disk/hcpl-shared/uploads:/app/public/system
   - /home/mbajur/apps/hcpl/shared:/shared
   - /home/mbajur/apps/hcpl/shared/log:/app/log
-  # hostname: "netguru.hcpl.production.sidekiq"
   command: bundle exec sidekiq --config config/sidekiq.yml
-  # labels:
-  #   - "netguru.appname=hcpl"
-  #   - "netguru.stage=production"
   links:
     - postgres
     - redis
@@ -48,11 +42,11 @@ postgres:
   environment:
     - POSTGRES_DB=hcpl
   volumes:
-    - '/home/mbajur/apps/hcpl/shared/postgres:/var/lib/postgresql/data'
+    - '/mnt/disk/hcpl-shared/postgres:/var/lib/postgresql/data'
 
 redis:
   image: redis:3.2-alpine
   ports:
     - "6379"
   volumes:
-    - '/home/mbajur/apps/hcpl/shared/redis:/var/lib/redis/data'
+    - '/mnt/disk/hcpl-shared/redis:/var/lib/redis/data'
