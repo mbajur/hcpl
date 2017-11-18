@@ -3,4 +3,4 @@ lock "~> 3.10.0"
 
 set :application, "hcpl"
 set :repo_url, 'git@github.com:mbajur/hcpl.git'
-set :deploy_to, "/home/mbajur/apps/#{fetch(:application)}"
+set :deploy_to, "/mnt/disk/apps/#{fetch(:application)}"
