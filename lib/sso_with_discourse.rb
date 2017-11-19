@@ -2,31 +2,28 @@
 # refenrece: https://meta.discourse.org/t/using-discourse-as-a-sso-provider/32974
 
 module SsoWithDiscourse
-  mattr_accessor :secret
-  @@secret = Rails.application.config.discourse_sso_secret
+  # mattr_accessor :secret
+  # @@secret = Rails.application.config.discourse_sso_secret
 
-  mattr_accessor :url
-  @@url = Rails.application.config.discourse_sso_url
-
-  mattr_accessor :return_url
-  @@return_url = ''
+  # mattr_accessor :url
+  # @@url = Rails.application.config.discourse_sso_url
 
   # Exceptions
-  class SecretNotSetError < ArgumentError; end
-  class UrlNotSetError < ArgumentError; end
-  class ReturnUrlNotSetError < ArgumentError; end
+  # class SecretNotSetError < ArgumentError; end
+  # class UrlNotSetError < ArgumentError; end
+  # class ReturnUrlNotSetError < ArgumentError; end
 
   class Sso
     require 'securerandom'
 
-    attr_accessor :nonce, :user_info, :status, :message
+    attr_accessor :nonce, :user_info, :status, :message, :secret, :url, :return_url
 
-    def initialize
+    def initialize(opts = {})
+      @secret     = opts[:secret] || ENV['DISCOURSE_SSO_SECRET']
+      @url        = opts[:url] || ENV['DISCOURSE_SSO_URL']
+      @return_url = opts[:return_url]
+
       generate_nonce!
-    end
-
-    def return_url=(url)
-      @@return_url = url
     end
 
     def generate_nonce!
@@ -34,13 +31,11 @@ module SsoWithDiscourse
     end
 
     def request_url
-      validate_config!
-      "#{ SsoWithDiscourse.url }?sso=#{ url_encoded_payload }&sig=#{ hex_signature }"
+      # validate_config!
+      "#{ url }?sso=#{ url_encoded_payload }&sig=#{ hex_signature }"
     end
 
     def parse(params)
-      validate_config!
-
       # params should be something that looks like:
       # { sso: "xxxxxx", sig: "yyyyyy" }
       if get_hmac_hex_string(params[:sso]) == params[:sig]
@@ -75,17 +70,11 @@ module SsoWithDiscourse
 
     private
 
-      def validate_config!
-        raise SecretNotSetError unless SsoWithDiscourse.secret.present?
-        raise UrlNotSetError unless SsoWithDiscourse.url.present?
-        raise ReturnUrlNotSetError unless SsoWithDiscourse.return_url.present?
-      end
-
       def raw_payload
         unless @nonce
           raise "You must generate a nonce by calling generate_nonce! first."
         else
-          "nonce=#{ @nonce }&return_sso_url=#{ SsoWithDiscourse.return_url }"
+          "nonce=#{ @nonce }&return_sso_url=#{ return_url }"
         end
       end
 
@@ -102,7 +91,7 @@ module SsoWithDiscourse
       end
 
       def get_hmac_hex_string payload
-        OpenSSL::HMAC.hexdigest("sha256", SsoWithDiscourse.secret, payload)
+        OpenSSL::HMAC.hexdigest("sha256", secret, payload)
       end
 
       def base64? data

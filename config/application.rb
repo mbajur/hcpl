@@ -29,10 +29,5 @@ module Hcpl
 
     # Don't generate system test files.
     config.generators.system_tests = nil
-
-    # Discourse SSO settings
-    config.discourse_sso_url        = 'https://forum.hard-core.pl/session/sso_provider'
-    # config.discourse_sso_return_url = Rails.application.routes.url_helpers.sign_in_comeback_url
-    config.discourse_sso_secret     = '703a7637d17f1afea3ea62c83eabe1b088afbfc34929b13f0eb72043ccff7f361be925db2358ca8c4133ebd5529eb1e0cea311f1654e92fda16bc12c72ba4f10'
   end
 end
