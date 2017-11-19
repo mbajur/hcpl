@@ -2,8 +2,7 @@ web:
   build: .
   dockerfile: docker/production/Dockerfile
   volumes:
-    # - hcpl-production-assets:/app/public/assets
-    - /mnt/disk/apps/hcpl/shared/public/assets:/app/public/assets
+    - hcpl-production-assets:/app/public/assets
     - /mnt/disk/apps/hcpl/shared/public/system:/app/public/system
     - /mnt/disk/apps/hcpl/shared:/shared
     - /mnt/disk/apps/hcpl/shared/log:/app/log
@@ -28,7 +27,6 @@ sidekiq:
   restart: always
   env_file: /mnt/disk/apps/hcpl/shared/secrets.env
   volumes:
-    - /mnt/disk/apps/hcpl/shared/public/assets:/app/public/assets
     - /mnt/disk/apps/hcpl/shared/public/system:/app/public/system
     - /mnt/disk/apps/hcpl/shared:/shared
     - /mnt/disk/apps/hcpl/shared/log:/app/log
