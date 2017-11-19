@@ -47,7 +47,7 @@ RUN SECRET_KEY_BASE=fake \
   bundle exec rake assets:precompile
 
 # Setup entrypoint
-ENTRYPOINT ["./docker/production/entrypoint.sh"]
+# ENTRYPOINT ["./docker/production/entrypoint.sh"]
 
 # Start puma
 CMD bundle exec rails s -b 0.0.0.0
