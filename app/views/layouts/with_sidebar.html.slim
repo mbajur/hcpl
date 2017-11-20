@@ -44,7 +44,7 @@ html
                 .main-sidebar-events
                   h3.mt-4 Nadchodzące wydarzenia
                   ul.list-unstyled
-                    - PostEvent.upcoming_first.includes(:post).limit(5).each do |e|
+                    - PostEvent.upcoming_first.upcoming.includes(:post).limit(5).each do |e|
                       li
                         a(href=e.post.path)
                           .main-sidebar-events-meta
