@@ -22,6 +22,8 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user!
+    return true if user_signed_in?
+
     redirect_to root_path, notice: 'Najpierw musisz się zalogować'
     return false
   end
