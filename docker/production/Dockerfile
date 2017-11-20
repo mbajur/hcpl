@@ -5,7 +5,8 @@ RUN apt-get update -qq && apt-get install -y \
   apt-transport-https \
   build-essential \
   libpq-dev \
-  curl
+  curl \
+  imagemagick
 
 # for a JS runtime
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
