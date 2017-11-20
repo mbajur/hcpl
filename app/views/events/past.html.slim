@@ -1,9 +1,10 @@
-= content_for :content_heading do
-  = title 'Minione wydarzenia'
+- @sidebar_disabled = true
+
+= content_for :content_nav do
+  = render 'events/index_content_nav'
 
 = content_for :content_body do
-  ul.list-unstyled.posts-list
-    = render @posts
+  = render 'events/events', posts_months: @posts_months
 
-= content_for :sidebar do
-  = render 'events/sidebar'
+= content_for :after_content do
+  = paginate @posts

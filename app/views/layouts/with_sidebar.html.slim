@@ -7,7 +7,7 @@ html
       = render '/layouts/nav'
 
       .container.main
-        .row
+        .row.justify-content-center
           .col-9.main-content
             .main-content-inner
               - if content_for?(:content_nav)
@@ -20,34 +20,36 @@ html
 
               = yield :content_body
 
+            = yield :after_content
 
 
-          .col.main-sidebar
-            .main-sidebar__inner
-              - if content_for?(:sidebar)
-                = yield :sidebar
+          - unless @sidebar_disabled
+            .col.main-sidebar
+              .main-sidebar__inner
+                - if content_for?(:sidebar)
+                  = yield :sidebar
 
-              - else
-                = form_tag search_path, method: :get do
-                  .form-group
-                    input.form-control(type="search" placeholder="Szukaj..." name="q" value=params[:q])
+                - else
+                  = form_tag search_path, method: :get do
+                    .form-group
+                      input.form-control(type="search" placeholder="Szukaj..." name="q" value=params[:q])
 
-                ul.list-inline
-                  li.list-inline-item.main-sidebar-tag
-                    a.btn.btn-outline-secondary.btn-sm(href=root_path) Wszystkie kategorie
-
-                  - ActsAsTaggableOn::Tag.where(is_primary: true).each do |tag|
+                  ul.list-inline
                     li.list-inline-item.main-sidebar-tag
-                      a.btn.btn-outline-secondary.btn-sm(href=tag_path(tag.slug))
-                        = tag
+                      a.btn.btn-outline-secondary.btn-sm(href=root_path) Wszystkie kategorie
 
-                .main-sidebar-events
-                  h3.mt-4 Nadchodzące wydarzenia
-                  ul.list-unstyled
-                    - PostEvent.upcoming_first.upcoming.includes(:post).limit(5).each do |e|
-                      li
-                        a(href=e.post.path)
-                          .main-sidebar-events-meta
-                            | Za #{time_ago_in_words e.beginning_at} - #{e.city}
-                          h4
-                            = e.post.title
+                    - ActsAsTaggableOn::Tag.where(is_primary: true).each do |tag|
+                      li.list-inline-item.main-sidebar-tag
+                        a.btn.btn-outline-secondary.btn-sm(href=tag_path(tag.slug))
+                          = tag
+
+                  .main-sidebar-events
+                    h3.mt-4 Nadchodzące wydarzenia
+                    ul.list-unstyled
+                      - PostEvent.upcoming_first.upcoming.includes(:post).limit(5).each do |e|
+                        li
+                          a(href=e.post.path)
+                            .main-sidebar-events-meta
+                              | Za #{time_ago_in_words e.beginning_at} - #{e.city}
+                            h4
+                              = e.post.title

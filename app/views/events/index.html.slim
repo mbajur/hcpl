@@ -1,19 +1,10 @@
-= content_for :content_nav do
-  ul.list-inline.mb-0
-    li.list-inline-item
-      a.active Nadchodzące
+- @sidebar_disabled = true
 
-    li.list-inline-item
-      a Minione
+= content_for :content_nav do
+  = render 'events/index_content_nav'
 
 = content_for :content_body do
-  - @posts_months.each do |month, posts|
-    .events-month
-      = month.strftime('%B %Y')
+  = render 'events/events', posts_months: @posts_months
 
-    ul.list-unstyled.events-list
-      - posts.each do |post|
-        = render 'events/event', post: post
-
-= content_for :sidebar do
-  = render 'events/sidebar'
+= content_for :after_content do
+  = paginate @posts

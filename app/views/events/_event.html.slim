@@ -20,7 +20,7 @@ li.events-item
 
         .media-body.posts-item-content
           .events-item-beginning-at
-            = time_ago_in_words post.event.beginning_at
+            = event_beginning_at_formatted(post.event)
 
           h3.posts-item-title
             a(href=post.link target="_blank")
@@ -41,7 +41,7 @@ li.events-item
               a(href='#') = post.user.username
 
             li.list-inline-item.mr-3
-              | #{time_ago_in_words(post.created_at)} ago
+              | #{time_ago_in_words(post.created_at)} temu
 
             li.list-inline-item
               a(href=build_post_path(post)) #{post.comments_count} komentarze

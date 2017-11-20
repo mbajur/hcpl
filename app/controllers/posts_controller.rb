@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
 
+  before_action :authenticate_user!, only: [:saved, :new, :create, ]
+
   layout 'with_sidebar'
 
   def week
@@ -60,6 +62,7 @@ class PostsController < ApplicationController
   def fetch_posts
     Post
       .page(params[:page])
+      .per(50)
       .includes(post_includes)
   end
 
