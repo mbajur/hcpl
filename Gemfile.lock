@@ -141,7 +141,7 @@ GEM
       addressable
       faraday
       json (>= 1.8)
-    libv8 (3.16.14.19-x86_64-darwin-16)
+    libv8 (3.16.14.19)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -235,6 +235,8 @@ GEM
     seed-fu (2.3.6)
       activerecord (>= 3.1)
       activesupport (>= 3.1)
+    sentry-raven (2.7.1)
+      faraday (>= 0.7.6, < 1.0)
     simple_form (3.5.0)
       actionpack (> 4, < 5.2)
       activemodel (> 4, < 5.2)
@@ -316,6 +318,7 @@ DEPENDENCIES
   rails-assets-sticky-sidebar!
   sass-rails (~> 5.0)
   seed-fu (~> 2.3)
+  sentry-raven
   simple_form
   slim
   spring
