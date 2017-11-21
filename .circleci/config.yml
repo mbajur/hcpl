@@ -63,6 +63,19 @@ jobs:
           #                 --format progress \
           #                 "${TEST_FILES}"
 
+      - deploy:
+          name: Maybe Deploy
+          command: |
+            if [ "${CIRCLE_BRANCH}" != "master" ]; then
+              exit 0
+            fi
+            if [ -z "${BUNDLE_UPDATE}" ]; then
+              ./script/deploy-circleci.sh
+            else
+              gem install -N bundler circleci-bundle-update-pr
+              circleci-bundle-update-pr CircleCI circleci@example.com
+            fi
+
       # collect reports
       # - store_test_results:
       #     path: /tmp/test-results
