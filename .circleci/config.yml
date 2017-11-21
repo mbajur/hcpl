@@ -70,7 +70,7 @@ jobs:
               exit 0
             fi
             if [ -z "${BUNDLE_UPDATE}" ]; then
-              ./script/deploy-circleci.sh
+              ./.circleci/deploy-circleci.sh
             else
               gem install -N bundler circleci-bundle-update-pr
               circleci-bundle-update-pr CircleCI circleci@example.com
