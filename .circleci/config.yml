@@ -10,6 +10,7 @@ jobs:
        - image: circleci/ruby:2.4.1-node-browsers
          environment:
            PGHOST: 127.0.0.1
+           PGUSER: root
            DATABASE_URL: postgresql://root@localhost:5432/circle_test
 
       # Specify service dependencies here if necessary
