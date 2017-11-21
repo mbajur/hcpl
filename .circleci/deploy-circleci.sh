@@ -10,4 +10,4 @@ EOF
 eval $(ssh-agent)
 ssh-add
 
-bundle exec cap produdction deploy
+bundle exec cap production deploy
