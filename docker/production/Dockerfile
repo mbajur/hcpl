@@ -42,7 +42,7 @@ EXPOSE 3000
 COPY . ./
 
 # Precompile Rails assets
-RUN node -v
+ARG CACHEBUST=1
 RUN SECRET_KEY_BASE=fake \
   DATABASE_URL=postgres://fake@fake:5432/fake \
   bundle exec rake assets:precompile
