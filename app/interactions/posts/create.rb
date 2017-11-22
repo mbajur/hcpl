@@ -5,11 +5,13 @@ class Posts::Create < ActiveInteraction::Base
   string :tag_list
   object :user
 
-  validates :link, presence: true, if: proc { |p| p.description.blank? }
-  validates :description, presence: true, length: { minimum: 10 }, if: proc { |p| p.link.blank? }
-  validates :title, presence: true, length: { minimum: 10 }
+  validates :description, allow_blank: true, length: { minimum: 10 }
+  validates :title, allow_blank: true, length: { minimum: 10 }
+  validates :title, presence: true
   validates :user, presence: true
   validates :tag_list, presence: true
+
+  validate :link_or_description_present
 
   def to_model
     Post.new
@@ -32,5 +34,11 @@ class Posts::Create < ActiveInteraction::Base
 
   def cast_vote(post)
     post.votes.create(user_id: inputs[:user].id)
+  end
+
+  def link_or_description_present
+    return true if !(link.blank? && description.blank?)
+
+    errors.add(:base, "Post musi posiadać link lub tekst")
   end
 end

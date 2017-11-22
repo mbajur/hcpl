@@ -24,6 +24,8 @@ class PostsController < ApplicationController
     @bookmarks = current_user.bookmarks
                              .includes(bookmarkable: post_includes)
                              .where(bookmarkable_type: 'Post')
+                             .page(params[:page])
+                             .per(50)
                              .recent_first
   end
 
@@ -39,7 +41,8 @@ class PostsController < ApplicationController
   def new
     @post = Posts::Create.new(
       link:  params[:link],
-      title: params[:title]
+      title: params[:title],
+      tag_list: params[:tag_list]
     )
   end
 

@@ -40,6 +40,7 @@ import PostVoteBtn from '../components/PostVoteBtn.vue'
 import PostBookmarkBtn from '../components/PostBookmarkBtn.vue'
 import PostPreviewMediaBtn from '../components/PostPreviewMediaBtn.vue'
 import PostPreviewMedia from '../components/PostPreviewMedia.vue'
+import NewPostForm from '../components/NewPostForm.vue'
 
 Vue.use(VueResource)
 Vue.use(VueEventHub)
@@ -60,7 +61,8 @@ document.addEventListener('turbolinks:load', () => {
       PostVoteBtn,
       PostBookmarkBtn,
       PostPreviewMediaBtn,
-      PostPreviewMedia
+      PostPreviewMedia,
+      NewPostForm
     }
   })
 })
