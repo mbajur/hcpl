@@ -5,6 +5,7 @@ class Posts::Create < ActiveInteraction::Base
   string :tag_list
   object :user
 
+  validates :link, allow_blank: true, url: { message: 'wydaje się być niepoprawny' }
   validates :description, allow_blank: true, length: { minimum: 10 }
   validates :title, allow_blank: true, length: { minimum: 10 }
   validates :title, presence: true
@@ -39,6 +40,6 @@ class Posts::Create < ActiveInteraction::Base
   def link_or_description_present
     return true if !(link.blank? && description.blank?)
 
-    errors.add(:base, "Post musi posiadać link lub tekst")
+    errors.add(:base, 'Post musi posiadać link lub tekst')
   end
 end
