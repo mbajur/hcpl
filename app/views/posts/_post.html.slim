@@ -25,7 +25,7 @@ li.posts-item
 
             ul.list-inline.mb-0
               - post.tags.each do |tag|
-                li
+                li.list-inline-item
                   = link_to tag, tag_path(tag.slug), class: 'btn btn-outline-secondary btn-xs btn-tag'
 
           ul.list-inline.posts-item-meta
