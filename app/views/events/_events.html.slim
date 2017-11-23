@@ -1,7 +1,7 @@
-- posts_months.each do |month, posts|
+- events_months.each do |month, events|
   .events-month
     = l(month, format: '%B %Y').capitalize
 
   ul.list-unstyled.events-list
-    - posts.each do |post|
-      = render 'events/event', post: post
+    - events.each do |event|
+      = render 'events/event', event: event

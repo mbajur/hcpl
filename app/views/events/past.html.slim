@@ -2,10 +2,10 @@
   = render 'events/index_content_nav'
 
 = content_for :content_body do
-  = render 'events/events', posts_months: @posts_months
+  = render 'events/events', events_months: @events_months
 
 = content_for :after_content do
-  = paginate @posts
+  = paginate @events
 
 = content_for :sidebar do
   = render 'events/sidebar'
