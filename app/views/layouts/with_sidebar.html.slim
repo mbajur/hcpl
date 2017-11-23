@@ -24,7 +24,7 @@ html
 
 
           - unless @sidebar_disabled
-            .col.main-sidebar
+            .col.main-sidebar(data-js-sticky-sidebar)
               .main-sidebar__inner
                 - if content_for?(:sidebar)
                   = yield :sidebar
