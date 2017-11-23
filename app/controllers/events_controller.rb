@@ -22,7 +22,7 @@ class EventsController < ApplicationController
   end
 
   def post_includes
-    [:tags, :votes, :user, :bookmarks]
+    [:tags, :votes, :user, :bookmarks, :event]
   end
 
 end

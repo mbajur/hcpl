@@ -9,7 +9,8 @@ class SyncPostEventDataJob < ApplicationJob
 
     attrs = {
       beginning_at: (facebook_event['start_time'] rescue nil),
-      city:         (facebook_event['place']['location']['city'] rescue nil)
+      city:         (facebook_event['place']['location']['city'] rescue nil),
+      synced_at:    Time.zone.now
     }
 
     # Move that to #find_or_initialize_by

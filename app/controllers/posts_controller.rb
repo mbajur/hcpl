@@ -32,6 +32,8 @@ class PostsController < ApplicationController
   def show
     @post = Post.find_by!(token: params[:token])
     @comment = Comment.new(post: @post)
+
+    resync_post_event_data
   end
 
   def search
@@ -86,6 +88,15 @@ class PostsController < ApplicationController
 
   def post_includes
     [:tags, :votes, :user, :bookmarks]
+  end
+
+  def resync_post_event_data
+    return false unless @post.media_type == 'facebook_event'
+    return false unless @post.event.can_be_synced?
+
+    logger.debug 'Post has not been synced recently. Go!'
+
+    SyncPostEventDataJob.perform_later(@post.id)
   end
 
 end
