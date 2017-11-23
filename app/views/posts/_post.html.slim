@@ -39,7 +39,10 @@ li.posts-item
                   = image_tag post.user.avatar.thumb('50x50#').url
 
             li.list-inline-item.mr-3
-              a(href='#') = post.user.username
+              a(href='#')
+                = post.user.username
+                sub.ml-1(title="Karma")
+                  = post.user.karma
 
             li.list-inline-item.mr-3
               | #{time_ago_in_words(post.created_at)} temu

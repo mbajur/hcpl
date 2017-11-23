@@ -24,6 +24,7 @@ class Posts::Create < ActiveInteraction::Base
     if post.save
       cast_vote(post)
       PostScrapperJob.perform_later(post.id)
+      user.add_karma
     else
       errors.merge!(post.errors)
     end
