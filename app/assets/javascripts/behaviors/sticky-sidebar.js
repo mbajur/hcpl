@@ -1,4 +1,4 @@
-let initSidebar = function() {
+var initSidebar = function() {
   if (window.sidebar !== undefined) { window.sidebar.destroy() }
 
   window.sidebar = new StickySidebar('.main-sidebar', {
