@@ -51,6 +51,7 @@ gem 'discourse_api'
 gem 'meta-tags'
 gem "sentry-raven"
 gem 'validate_url'
+gem 'rack-mini-profiler'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

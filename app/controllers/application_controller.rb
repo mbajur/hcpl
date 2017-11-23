@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user_session, :current_user, :user_signed_in?
 
+  before_action :setup_rack_miniprofiler
+
   def index; end
 
   private
@@ -26,5 +28,11 @@ class ApplicationController < ActionController::Base
 
     redirect_to root_path, notice: 'Najpierw musisz się zalogować'
     return false
+  end
+
+  def setup_rack_miniprofiler
+    if current_user && current_user.is_admin?
+      Rack::MiniProfiler.authorize_request
+    end
   end
 end
