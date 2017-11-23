@@ -96,7 +96,7 @@ class PostsController < ApplicationController
 
     logger.debug 'Post has not been synced recently. Go!'
 
-    SyncPostEventDataJob.perform_later(@post.id)
+    PostScrapperJob.perform_later(@post.id)
   end
 
 end
