@@ -18,7 +18,7 @@ class EventsController < ApplicationController
   private
 
   def fetch_events
-    res = PostEvent.includes(:post)
+    res = PostEvent.includes(:post, post: [:votes, :user, :bookmarks])
                    .page(params[:page])
 
     res = res.search(params[:q]) if params[:q].present?

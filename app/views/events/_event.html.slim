@@ -21,17 +21,17 @@ li.events-item
 
         .media-body.posts-item-content
           .events-item-beginning-at
-            = event_beginning_at_formatted(post.event)
+            = event_beginning_at_formatted(event)
 
           h3.posts-item-title
             a(href=post.link target="_blank")
               = post.title
 
           ul.list-inline.events-item-meta
-            - if post.event.city.present?
+            - if event.city.present?
               li.list-inline-item
                 a.events-item-city(href="#")
-                  = post.event.city
+                  = event.city
 
             li.list-inline-item
               a.posts-item-avatar(href='#')

@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   acts_as_authentic do |c|
     c.validate_login_field = false
+    c.disable_perishable_token_maintenance = true
   end
 
   has_many :bookmarks
