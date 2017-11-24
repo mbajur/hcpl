@@ -12,6 +12,8 @@
 
 = content_for :content_body do
   ul.list-unstyled.posts-list
-    = render partial: 'posts/post', collection: @posts, as: :post, cached: true
+    / = render partial: 'posts/post', collection: @posts, as: :post, cached: true
+    - @posts.each do |post|
+      = post.to_json
 
   = paginate @posts

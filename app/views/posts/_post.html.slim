@@ -1,60 +1,59 @@
 - auto_show = auto_show == true
 
-- cache([post, post.user, auto_show]) do
-  li.posts-item
-    post-bookmark-btn(
+li.posts-item
+  post-bookmark-btn(
+    post-guid=post.token
+    :bookmarked=post.user_bookmarked?(current_user).to_s
+  )
+
+  .media
+    post-vote-btn(
       post-guid=post.token
-      :bookmarked=post.user_bookmarked?(current_user).to_s
+      :voted=post.user_voted?(current_user).to_s
+      :votes-count=post.votes_count.to_s
     )
 
-    .media
-      post-vote-btn(
-        post-guid=post.token
-        :voted=post.user_voted?(current_user).to_s
-        :votes-count=post.votes_count.to_s
-      )
+    .media-body
+      .media
+        - if post.thumb.present?
+          a.posts-item-thumb(href=post.path style="background-image: url(#{post.thumb.thumb('59x48#').url})")
 
-      .media-body
-        .media
-          - if post.thumb.present?
-            a.posts-item-thumb(href=post.path style="background-image: url(#{post.thumb.thumb('59x48#').url})")
+        .media-body.posts-item-content
+          h3.posts-item-title
+            a(href=post.link target="_blank")
+              = post.title
 
-          .media-body.posts-item-content
-            h3.posts-item-title
-              a(href=post.link target="_blank")
-                = post.title
+            ul.list-inline.mb-0
+              - post.tags.each do |tag|
+                li.list-inline-item
+                  = link_to tag, tag_path(tag.slug), class: 'btn btn-outline-secondary btn-xs btn-tag'
 
-              ul.list-inline.mb-0
-                - post.tags.each do |tag|
-                  li.list-inline-item
-                    = link_to tag, tag_path(tag.slug), class: 'btn btn-outline-secondary btn-xs btn-tag'
+          ul.list-inline.posts-item-meta
+            - if post.has_media? && post.media_previewable?
+              li.list-inline-item.mr-2.pr-1
+                post-preview-media-btn(post-token=post.token)
 
-            ul.list-inline.posts-item-meta
-              - if post.has_media? && post.media_previewable?
-                li.list-inline-item.mr-2.pr-1
-                  post-preview-media-btn(post-token=post.token)
+            li.list-inline-item
+              a.posts-item-avatar(href='#')
+                - if post.user.avatar.present?
+                  = image_tag post.user.avatar.thumb('50x50#').url
 
-              li.list-inline-item
-                a.posts-item-avatar(href='#')
-                  - if post.user.avatar.present?
-                    = image_tag post.user.avatar.thumb('50x50#').url
+            li.list-inline-item.mr-3
+              a(href='#')
+                = post.user.username
+                sub.ml-1(title="Karma")
+                  = post.user.karma
 
-              li.list-inline-item.mr-3
-                a(href='#')
-                  = post.user.username
-                  sub.ml-1(title="Karma")
-                    = post.user.karma
+            li.list-inline-item.mr-3
+              human-date-time(date-time=post.created_at.iso8601)
 
-              li.list-inline-item.mr-3
-                human-date-time(date-time=post.created_at.iso8601)
+            li.list-inline-item
+              a(href=build_post_path(post)) #{post.comments_count} komentarze
 
-              li.list-inline-item
-                a(href=build_post_path(post)) #{post.comments_count} komentarze
-
-        - if post.has_media? && post.media_previewable?
-          post-preview-media(
-            guid=post.media_guid
-            type=post.media_type
-            post-token=post.token
-            :auto-show=auto_show.to_s
-          )
+      - if post.has_media? && post.media_previewable?
+        post-preview-media(
+          guid=post.media_guid
+          type=post.media_type
+          post-token=post.token
+          :auto-show=auto_show.to_s
+        )
