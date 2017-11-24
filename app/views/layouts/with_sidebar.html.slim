@@ -50,6 +50,6 @@ html
                         li
                           a(href=e.post.path)
                             .main-sidebar-events-meta
-                              | Za #{time_ago_in_words e.beginning_at} - #{e.city}
+                              | <human-date-time date-time="#{e.beginning_at.iso8601}"></human-date-time> - #{e.city}
                             h4
                               = e.post.title

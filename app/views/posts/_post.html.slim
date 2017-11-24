@@ -45,7 +45,7 @@ li.posts-item
                   = post.user.karma
 
             li.list-inline-item.mr-3
-              | #{time_ago_in_words(post.created_at)} temu
+              human-date-time(date-time=post.created_at.iso8601)
 
             li.list-inline-item
               a(href=build_post_path(post)) #{post.comments_count} komentarze

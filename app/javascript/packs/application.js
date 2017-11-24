@@ -36,14 +36,19 @@ import Vue from 'vue/dist/vue.esm'
 import VueResource from 'vue-resource'
 import VueEventHub from 'vue-event-hub'
 
+import 'moment/locale/pl'
+import VueMoment from 'vue-moment'
+
 import PostVoteBtn from '../components/PostVoteBtn.vue'
 import PostBookmarkBtn from '../components/PostBookmarkBtn.vue'
 import PostPreviewMediaBtn from '../components/PostPreviewMediaBtn.vue'
 import PostPreviewMedia from '../components/PostPreviewMedia.vue'
 import NewPostForm from '../components/NewPostForm.vue'
+import HumanDateTime from '../components/HumanDateTime.vue'
 
 Vue.use(VueResource)
 Vue.use(VueEventHub)
+Vue.use(VueMoment)
 
 // Vue-resource settings
 Vue.http.options.root = '/api/internal/v1'
@@ -62,7 +67,8 @@ document.addEventListener('turbolinks:load', () => {
       PostBookmarkBtn,
       PostPreviewMediaBtn,
       PostPreviewMedia,
-      NewPostForm
+      NewPostForm,
+      HumanDateTime
     }
   })
 })

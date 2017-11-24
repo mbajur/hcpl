@@ -21,7 +21,7 @@ li.events-item
 
         .media-body.posts-item-content
           .events-item-beginning-at
-            = event_beginning_at_formatted(event)
+            human-date-time(date-time=event.beginning_at.iso8601)
 
           h3.posts-item-title
             a(href=post.link target="_blank")
@@ -45,7 +45,7 @@ li.events-item
                   = post.user.karma
 
             li.list-inline-item.mr-3
-              | #{time_ago_in_words(post.created_at)} temu
+              human-date-time(date-time=event.created_at.iso8601)
 
             li.list-inline-item
               a(href=build_post_path(post)) #{post.comments_count} komentarze
