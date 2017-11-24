@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   get 't/:slug', to: 'tags#show', as: :tag
   get 'p/:token/:slug', to: 'posts#show', as: :post
+  get '@:username', to: 'users#show', as: :user
 
   get 'auth/sign_in', to: 'auth#sign_in', as: :sign_in
   delete 'auth/sign_out', to: 'auth#sign_out', as: :sign_out

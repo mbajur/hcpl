@@ -308,8 +308,12 @@ $main-sidebar-sity-count-size: 25px;
   position: relative;
 }
 
-.posts-item-vote {
+.posts-item-vote-wrap {
   margin-right: 1em;
+  width: 36px;
+}
+
+.posts-item-vote {
   height: 48px;
   padding: .675rem 0rem .375rem;
   width: 36px;
@@ -413,10 +417,9 @@ $main-sidebar-sity-count-size: 25px;
   }
 
   span {
-    top: 50%;
+    top: 19px;
     position: absolute;
     right: 15px;
-    transform: translateY(-50%);
 
     path {
       fill: #777;
@@ -600,4 +603,12 @@ $main-sidebar-sity-count-size: 25px;
     border-radius: 3px;
     display: inline-block;
   }
+}
+
+// User profile
+
+.user-profile-avatar {
+  border: 5px solid #fff;
+  border-radius: 50%;
+  margin-bottom: 1em;
 }

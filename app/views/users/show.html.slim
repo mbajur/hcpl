@@ -1,0 +1,17 @@
+- @body_class = 'user-profile'
+
+= content_for :sidebar do
+  .text-center
+    = image_tag @user.avatar.thumb('200x200#').url, class: 'user-profile-avatar', size: '200x200'
+
+    h1.h3.user-profile-username
+      = title @user.username
+
+    p.text-muted
+      | Karma: #{@user.karma}
+
+= content_for :content_body do
+  ul.list-unstyled.posts-list
+    = render partial: 'posts/post', collection: @posts, as: :post
+
+  = paginate @posts
