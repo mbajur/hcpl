@@ -3,11 +3,11 @@ class Post < ApplicationRecord
 
   PREVIEWABLE_MEDIA_TYPES = %w[youtube bandcamp_album].freeze
 
-  has_many :comments
+  has_many :comments, dependent: :destroy
   belongs_to :user
-  has_one :event, class_name: :PostEvent
-  has_many :votes, as: :voteable
-  has_many :bookmarks, as: :bookmarkable
+  has_one :event, class_name: :PostEvent, dependent: :destroy
+  has_many :votes, as: :voteable, dependent: :destroy
+  has_many :bookmarks, as: :bookmarkable, dependent: :destroy
 
   acts_as_taggable
   dragonfly_accessor :thumb
