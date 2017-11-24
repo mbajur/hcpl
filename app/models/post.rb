@@ -12,9 +12,10 @@ class Post < ApplicationRecord
   acts_as_taggable
   dragonfly_accessor :thumb
 
-  scope :this_week, -> { where('created_at > ?', Time.zone.now - 1.week).where('created_at <= ?', Time.zone.now) }
-  scope :this_month, -> { where('created_at > ?', Time.zone.now - 1.month).where('created_at <= ?', Time.zone.now) }
-  scope :this_year, -> { where('created_at > ?', Time.zone.now - 1.year).where('created_at <= ?', Time.zone.now) }
+  scope :this_week, -> { where('created_at > ?', Time.zone.now - 1.week) }
+  scope :last_two_weeks, -> { where('created_at > ?', Time.zone.now - 2.weeks) }
+  scope :this_month, -> { where('created_at > ?', Time.zone.now - 1.month) }
+  scope :this_year, -> { where('created_at > ?', Time.zone.now - 1.year) }
   scope :recent_first, -> { order(created_at: :desc) }
   scope :upcoming_events, -> { joins(:event).order('post_events.beginning_at ASC').where('post_events.beginning_at >= ?', Time.zone.now.beginning_of_day) }
   scope :past_events, -> { joins(:event).order('post_events.beginning_at ASC').where('post_events.beginning_at < ?', Time.zone.now.beginning_of_day) }
@@ -23,9 +24,15 @@ class Post < ApplicationRecord
 
   before_save :set_token
 
+  def self.hot
+    Post
+      .select('posts.*, (((posts.votes_count - 1 + posts.comments_count * 3) / POW(((EXTRACT(EPOCH FROM (now()-posts.created_at)) / 3600)::integer + 2), 1.5))) AS hottness')
+      .order('hottness DESC')
+  end
+
   def self.popular
     Post
-      .select('posts.*, (((posts.votes_count - 1 + posts.comments_count * 3) / POW(((EXTRACT(EPOCH FROM (now()-posts.created_at)) / 3600)::integer + 2), 1.5))) AS popularity')
+      .select('posts.*, (posts.votes_count + posts.comments_count) AS popularity')
       .order('popularity DESC')
   end
 

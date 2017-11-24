@@ -1,0 +1,17 @@
+= content_for :content_nav do
+  = render 'index_content_nav'
+
+- if user_signed_in?
+  = content_for :content_heading do
+    = title 'Popularne teraz'
+
+- else
+  - @content_heading_variant = 'signup'
+  = content_for :content_heading do
+    | Crater.io: the latest programming news lands here first!
+
+= content_for :content_body do
+  ul.list-unstyled.posts-list
+    = render @posts
+
+  = paginate @posts

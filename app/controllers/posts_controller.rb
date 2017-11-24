@@ -4,6 +4,10 @@ class PostsController < ApplicationController
 
   layout 'with_sidebar'
 
+  def now
+    @posts = fetch_posts.hot.last_two_weeks
+  end
+
   def week
     @posts = fetch_posts.popular.this_week
   end

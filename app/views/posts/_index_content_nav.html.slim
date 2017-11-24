@@ -1,9 +1,10 @@
 ul.list-inline.mb-0
   li.list-inline-item.dropdown
-    = active_link_to 'Popularne', posts_popular_this_month_path, class: 'dropdown-toggle', data: { toggle: 'dropdown' }, active: [['posts'], ['week', 'month', 'year']]
+    = active_link_to 'Popularne', posts_popular_this_month_path, class: 'dropdown-toggle', data: { toggle: 'dropdown' }, active: [['posts'], ['now', 'week', 'month', 'year']]
 
     .dropdown-menu
-      = active_link_to 'Tydzień', root_path, class: 'dropdown-item', active: :exclusive
+      = active_link_to 'Teraz', root_path, class: 'dropdown-item', active: :exclusive
+      = active_link_to 'Tydzień', posts_popular_this_week_path, class: 'dropdown-item'
       = active_link_to 'Miesiąc', posts_popular_this_month_path, class: 'dropdown-item'
       = active_link_to 'Rok', posts_popular_this_year_path, class: 'dropdown-item'
 

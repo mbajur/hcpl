@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root to: 'posts#week'
+  root to: 'posts#now'
 
+  get :week, to: 'posts#week', as: :posts_popular_this_week
   get :month, to: 'posts#month', as: :posts_popular_this_month
   get :year, to: 'posts#year', as: :posts_popular_this_year
   get :new, to: 'posts#recent', as: :new
