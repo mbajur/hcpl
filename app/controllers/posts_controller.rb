@@ -67,7 +67,7 @@ class PostsController < ApplicationController
   def fetch_posts
     Post
       .page(params[:page])
-      .per(50)
+      .per(25)
       .includes(post_includes)
   end
 
