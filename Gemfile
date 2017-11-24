@@ -69,6 +69,10 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
+group :production do
+  gem 'rack-cache', require: 'rack/cache'
+end
+
 group :deployment do
   gem 'capistrano'
   gem 'capose'

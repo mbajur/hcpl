@@ -184,6 +184,8 @@ GEM
     public_suffix (3.0.0)
     puma (3.10.0)
     rack (2.0.3)
+    rack-cache (1.6.1)
+      rack (>= 0.4)
     rack-mini-profiler (0.10.6)
       rack (>= 1.2.0)
     rack-proxy (0.6.2)
@@ -319,6 +321,7 @@ DEPENDENCIES
   pg (~> 0.18)
   pg_search
   puma (~> 3.7)
+  rack-cache
   rack-mini-profiler
   rails (~> 5.1.4)
   rails-assets-sticky-sidebar!
