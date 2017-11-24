@@ -8,11 +8,12 @@ li.events-item
   )
 
   .media
-    post-vote-btn(
-      post-guid=post.token
-      :voted=post.user_voted?(current_user).to_s
-      :votes-count=post.votes_count.to_s
-    )
+    .posts-item-vote-wrap
+      post-vote-btn(
+        post-guid=post.token
+        :voted=post.user_voted?(current_user).to_s
+        :votes-count=post.votes_count.to_s
+      )
 
     .media-body
       .media
