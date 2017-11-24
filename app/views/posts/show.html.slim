@@ -1,6 +1,9 @@
 = content_for :content_body do
   ul.list-unstyled.posts-list
-    = render @post, auto_show: true
+    - if @post.media_type == 'facebook_event'
+      = render 'events/event', event: @post.event
+    - else
+      = render @post, auto_show: true
 
   - if @post.description.present?
     .post-body
