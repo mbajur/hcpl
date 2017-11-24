@@ -19,38 +19,3 @@
       :full-error-messages=@post.errors.full_messages
       :tags=ActsAsTaggableOn::Tag.all.map(&:name).to_json
     )
-
-  / javascript:
-  /   $(document).ready(function() {
-  /     var isFetchingTitle = false
-
-  /     $('#fetch-post-title').click(function(e) {
-  /       e.preventDefault()
-
-  /       var originalText = $(this).text()
-
-  /       if (isFetchingTitle) { return true }
-  /       isFetchingTitle = true
-
-  /       $(this).text('Momencik...')
-  /       $(this).attr('disabled', 'disabled')
-
-  /       var req = $.post('/api/internal/v1/posts/fetch_title', {
-  /         link: $('#post_link').val()
-  /       })
-
-  /       req.done(function(data) {
-  /         $('#post_title').val(data.title)
-  /       })
-
-  /       req.fail(function(data) {
-  /         alert('Coś poszło nie tak. Spróbuj ponownie za chwilę.')
-  /       })
-
-  /       req.always(function(data) {
-  /         isFetchingTitle = false
-  /         $('#fetch-post-title').text(originalText)
-  /         $(this).removeAttr('disabled')
-  /       })
-  /     })
-  /   })

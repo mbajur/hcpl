@@ -586,3 +586,18 @@ $main-sidebar-sity-count-size: 25px;
   padding-left: .3em;
   padding-right: .3em;
 }
+
+// Pagination
+
+.pagination {
+  padding: 0 1.3em 1em;
+
+  .page-item-next {
+    float: right;
+  }
+
+  .page-link {
+    border-radius: 3px;
+    display: inline-block;
+  }
+}

@@ -3,8 +3,6 @@
 
 = content_for :content_body do
   = render 'events/events', events_months: @events_months
-
-= content_for :after_content do
   = paginate @events
 
 = content_for :sidebar do
