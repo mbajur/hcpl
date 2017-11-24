@@ -24,6 +24,16 @@ label {
   font-weight: 600;
 }
 
+footer {
+  font-size: .8em;
+  color: #888888;
+  padding: 1em 0 2em;
+
+  a {
+    color: inherit;
+  }
+}
+
 /*  */
 
 .text-truncate {
