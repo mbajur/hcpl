@@ -38,21 +38,23 @@ html
                     li.list-inline-item.main-sidebar-tag
                       a.btn.btn-outline-secondary.btn-sm(href=root_path) Wszystkie kategorie
 
-                    - ActsAsTaggableOn::Tag.where(is_primary: true).each do |tag|
-                      li.list-inline-item.main-sidebar-tag
-                        a.btn.btn-outline-secondary.btn-sm(href=tag_path(tag.slug))
-                          = tag
+                    - cache('sidebar/tags', expires_in: 1.day) do
+                      - ActsAsTaggableOn::Tag.where(is_primary: true).each do |tag|
+                        li.list-inline-item.main-sidebar-tag
+                          a.btn.btn-outline-secondary.btn-sm(href=tag_path(tag.slug))
+                            = tag
 
                   .main-sidebar-events
                     h3.mt-4 Nadchodzące wydarzenia
                     ul.list-unstyled
-                      - PostEvent.upcoming_first.upcoming.includes(:post).limit(5).each do |e|
-                        li
-                          a(href=e.post.path)
-                            .main-sidebar-events-meta
-                              | <human-date-time date-time="#{e.beginning_at.iso8601}"></human-date-time> - #{e.city}
-                            h4
-                              = e.post.title
+                      - cache('sidebar/upcoming_events', expires_in: 1.hour) do
+                        - PostEvent.upcoming_first.upcoming.includes(:post).limit(5).each do |e|
+                          li
+                            a(href=e.post.path)
+                              .main-sidebar-events-meta
+                                | <human-date-time date-time="#{e.beginning_at.iso8601}"></human-date-time> - #{e.city}
+                              h4
+                                = e.post.title
 
       footer.text-center
         | <a href="http://hard-core.pl">hard-core.pl</a> / facebook: <a target="_blank" href="https://fb.com/hardcorepl">hardcorepl</a> / gh: <a target="_blank" href="https://github.com/mbajur/hcpl">hcpl</a>
