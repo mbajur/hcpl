@@ -21,4 +21,15 @@ module ApplicationHelper
       "#{date} temu"
     end
   end
+
+  def post_popularity_score(post)
+    epoch = 1.day.ago.to_i
+    divisor = 3600
+
+    seconds = post.created_at.to_i - epoch
+    recentness = (seconds / divisor).to_i
+
+    pop = post.votes_count + post.comments_count
+    pop + recentness
+  end
 end

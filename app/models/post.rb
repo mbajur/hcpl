@@ -1,6 +1,9 @@
 class Post < ApplicationRecord
   include PgSearch
 
+  HOTTNESS_TIME_INTERVAL = 3
+  HOTTNESS_COMMENTS_MODIFIER = 10
+
   PREVIEWABLE_MEDIA_TYPES = %w[youtube bandcamp_album].freeze
 
   has_many :comments, dependent: :destroy
@@ -24,9 +27,22 @@ class Post < ApplicationRecord
 
   before_save :set_token
 
+  # Ruby method:
+  #
+  #   def post_popularity_score(post)
+  #     epoch = 1.day.ago.to_i
+  #     divisor = 3600
+  #
+  #     seconds = post.created_at.to_i - epoch
+  #     recentness = (seconds / divisor).to_i
+  #
+  #     pop = post.votes_count + post.comments_count
+  #     pop + recentness
+  #   end
+  #
   def self.hot
     Post
-      .select('posts.*, (((posts.votes_count - 1 + posts.comments_count * 3) / POW(((EXTRACT(EPOCH FROM (now()-posts.created_at)) / 3600)::integer + 2), 1.5))) AS hottness')
+      .select("posts.*, votes_count + comments_count * #{HOTTNESS_COMMENTS_MODIFIER} + ((EXTRACT(EPOCH from created_at) - EXTRACT(EPOCH from (now() - interval '#{HOTTNESS_TIME_INTERVAL}' day))::integer) / 3600) as hottness")
       .order('hottness DESC')
   end
 
