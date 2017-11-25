@@ -27,6 +27,7 @@ class Post < ApplicationRecord
 
   before_save :set_token
 
+  # Based on http://sorentwo.com/2013/12/30/let-postgres-do-the-work.html
   # Ruby method:
   #
   #   def post_popularity_score(post)
