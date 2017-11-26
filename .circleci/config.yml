@@ -65,7 +65,7 @@ jobs:
 
       - add_ssh_keys:
           fingerprints:
-            - "4e:ed:97:ef:65:df:7f:8d:c0:9d:5f:25:12:37:01:fa"
+            - "2f:3c:f1:ab:1d:d2:38:d4:04:3b:f9:31:64:f4:41:63"
 
       - deploy:
           name: Maybe Deploy
