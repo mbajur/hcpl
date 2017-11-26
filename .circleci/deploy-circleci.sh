@@ -11,4 +11,4 @@ eval $(ssh-agent)
 ssh-add
 
 git remote add production dokku@dokku.hcxp.co:hcpl
-git push master
+git push dokku master
