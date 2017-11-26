@@ -10,4 +10,5 @@ EOF
 eval $(ssh-agent)
 ssh-add
 
-bundle exec cap production deploy
+git remote add production dokku@dokku.hcxp.co:hcpl
+git push master
