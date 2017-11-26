@@ -70,6 +70,11 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
+group :production do
+  # gem 'dragonfly-s3_data_store'
+  # gem 'mime-types'
+end
+
 group :deployment do
   gem 'capistrano'
   gem 'capose'
