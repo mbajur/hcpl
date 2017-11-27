@@ -52,7 +52,7 @@ html
                           li
                             a(href=e.post.path)
                               .main-sidebar-events-meta
-                                | <human-date-time date-time="#{e.beginning_at.iso8601}"></human-date-time> - #{e.city}
+                                | <event-beginning-at date-time="#{e.beginning_at.try(:iso8601)}"></event-beginning-at> - #{e.city}
                               h4
                                 = e.post.title
 

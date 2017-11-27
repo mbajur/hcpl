@@ -45,6 +45,7 @@ import PostPreviewMediaBtn from '../components/PostPreviewMediaBtn.vue'
 import PostPreviewMedia from '../components/PostPreviewMedia.vue'
 import NewPostForm from '../components/NewPostForm.vue'
 import HumanDateTime from '../components/HumanDateTime.vue'
+import EventBeginningAt from '../components/EventBeginningAt.vue'
 
 Vue.use(VueResource)
 Vue.use(VueEventHub)
@@ -68,7 +69,8 @@ document.addEventListener('turbolinks:load', () => {
       PostPreviewMediaBtn,
       PostPreviewMedia,
       NewPostForm,
-      HumanDateTime
+      HumanDateTime,
+      EventBeginningAt
     }
   })
 })

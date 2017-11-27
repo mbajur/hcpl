@@ -21,8 +21,9 @@ li.events-item
           a.events-item-thumb(href=post.path style="background-image: url(#{post.thumb.thumb('83x65#').url})")
 
         .media-body.posts-item-content
-          .events-item-beginning-at
-            human-date-time(date-time=event.beginning_at.iso8601)
+          - if event.beginning_at.present?
+            .events-item-beginning-at
+              event-beginning-at(date-time=event.beginning_at.iso8601)
 
           h3.posts-item-title
             a(href=post.link target="_blank")
