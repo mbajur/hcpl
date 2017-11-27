@@ -14,12 +14,17 @@ class Posts::Create < ActiveInteraction::Base
 
   validate :link_or_description_present
 
+  set_callback :validate, :before, :clear_link
+
   def to_model
     Post.new
   end
 
   def execute
     post = Post.new(inputs)
+
+    # Remove junk from links
+    post.link = clear_link(post.link)
 
     if post.save
       cast_vote(post)
@@ -42,5 +47,9 @@ class Posts::Create < ActiveInteraction::Base
     return true if !(link.blank? && description.blank?)
 
     errors.add(:base, 'Post musi posiadać link lub tekst')
+  end
+
+  def clear_link
+    self.link = PostRank::URI.clean(link) if link.present?
   end
 end

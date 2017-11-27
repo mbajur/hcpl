@@ -91,6 +91,8 @@ GEM
       rack (>= 1.6)
     domain_name (0.5.20170404)
       unf (>= 0.0.5, < 1.0.0)
+    domainatrix (0.0.11)
+      addressable
     dotenv (2.2.1)
     dotenv-rails (2.2.1)
       dotenv (= 2.2.1)
@@ -191,6 +193,10 @@ GEM
       activerecord (>= 3.1)
       activesupport (>= 3.1)
       arel
+    postrank-uri (1.0.16)
+      addressable (>= 2.3.0)
+      domainatrix
+      nokogiri
     public_suffix (3.0.0)
     puma (3.10.0)
     rack (2.0.3)
@@ -329,6 +335,7 @@ DEPENDENCIES
   metainspector
   pg (~> 0.18)
   pg_search
+  postrank-uri
   puma (~> 3.7)
   rack-mini-profiler
   rails (~> 5.1.4)

@@ -53,6 +53,7 @@ gem "sentry-raven"
 gem 'validate_url'
 gem 'rack-mini-profiler'
 gem 'draper'
+gem 'postrank-uri' # clear links
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
