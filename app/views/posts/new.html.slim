@@ -17,5 +17,5 @@
       csrf-token=form_authenticity_token
       :post={link: @post.link, title: @post.title, tag_list: @post.tag_list, description: @post.description}.to_json
       :full-error-messages=@post.errors.full_messages
-      :tags=ActsAsTaggableOn::Tag.all.map(&:name).to_json
+      :tags=ActsAsTaggableOn::Tag.where(is_primary: true).map(&:name).to_json
     )

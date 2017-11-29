@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :internal do
       namespace :v1 do
+        resources :tags, only: [:index]
         resource :posts do
           post ':token/toggle_vote', action: :toggle_vote
           post ':token/toggle_bookmark', action: :toggle_bookmark

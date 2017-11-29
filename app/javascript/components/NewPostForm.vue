@@ -32,18 +32,23 @@
     .form-group.row
       label.col-sm-3.col-form-label.post_link(for="post_tag_list") Tagi
       .col-sm-9
-        input.form-control.d-none(type="text" name="post[tag_list]" id="post_tag_list" v-model="form.tag_list")
+        input.form-control(type="hidden" :value="form.tag_list" name="post[tag_list]" id="post_tag_list")
         multiselect(
           v-model="form.tag_list"
           :options="tagsInputOptions"
           :multiple="true"
           :taggable="true"
           tag-placeholder="Dodaj jako nowy tag",
-          placeholder="Szukaj albo dodaj tagi"
+          placeholder="Szukaj lub dodaj tag"
+          select-label="Wciśnij enter aby wybrać"
+          deselect-label="Wciśnij enter aby usunąć"
+          selected-label="Zaznaczony"
           @tag="addTag"
           :hide-selected="true"
           :max="5"
+          @search-change="handleTagsSearchChange"
         )
+        small.form-text.text-muted Wybierz do pięciu tagów opisujących ten post
 
     .form-group.row
       label.col-sm-3.col-form-label.post_link(for="post_description") Tekst
@@ -94,7 +99,7 @@ export default {
         tag_list: (this.post.tag_list !== null && this.post.tag_list.trim() !== '') ? this.post.tag_list.split(',') : [],
         description: cloneString(this.post.description),
       },
-      tagsInputOptions: Object.assign([], this.tags)
+      fetchedTags: []
     }
   },
 
@@ -118,13 +123,34 @@ export default {
     addTag (newTag) {
       this.tagsInputOptions.push(newTag)
       this.form.tag_list.push(newTag)
+    },
+
+    handleTagsSearchChange (query) {
+      if (query.length == 0) { return false }
+      let req = this.$http.get('tags', { params: { q: query } })
+
+      req.then((resp) => {
+        this.fetchedTags = resp.data.map((t) => { return t.name })
+      })
     }
   },
 
   computed: {
     isFetchLinkDisabled () {
       return this.fetchingLink
+    },
+
+    tagsInputOptions () {
+      return Array.from(new Set(this.tags.concat(this.fetchedTags))) || []
     }
   }
 }
 </script>
+
+<style>
+@import url(vue-multiselect/dist/vue-multiselect.min.css);
+
+.multiselect__tags {
+  border-color: #ced4da;
+}
+</style>
