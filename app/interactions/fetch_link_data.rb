@@ -4,11 +4,7 @@ class FetchLinkData < ActiveInteraction::Base
   validates :link, presence: true, url: { message: 'wydaje się być niepoprawny' }
 
   def execute
-    {
-      title:      data[:page].best_title,
-      media_type: data[:classifier].media_type,
-      media_guid: data[:classifier].media_guid
-    }
+    data
   end
 
   private
@@ -23,7 +19,11 @@ class FetchLinkData < ActiveInteraction::Base
       page       = MetaInspector.new(inputs[:link])
       classifier = PageClassifier::Perform.new(page).call
 
-      { page: page, classifier: classifier }
+      {
+        title: page.best_title,
+        media_type: classifier.media_type,
+        media_guid: classifier.media_guid,
+      }
     end
   end
 end
