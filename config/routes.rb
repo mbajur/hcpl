@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    resources :tags
+    resources :users
+    resources :bookmarks
+    resources :comments
+    resources :posts
+    resources :post_events
+    resources :votes
+
+    root to: "tags#index"
+  end
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'posts#now'
 

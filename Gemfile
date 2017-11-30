@@ -33,27 +33,28 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'slim'
-gem 'kaminari'
-gem 'acts-as-taggable-on', github: 'mbleigh/acts-as-taggable-on'
-gem 'seed-fu', '~> 2.3'
-gem 'pg_search'
-gem 'babosa'
-gem 'authlogic'
-gem 'active_link_to'
-gem 'metainspector'
-gem 'dragonfly', '~> 1.1.3'
-gem 'simple_form'
 gem 'active_interaction', '~> 3.6'
+gem 'active_link_to'
+gem 'acts-as-taggable-on', github: 'mbleigh/acts-as-taggable-on'
+gem 'administrate'
+gem 'authlogic'
+gem 'babosa'
+gem 'discourse_api'
+gem 'dragonfly', '~> 1.1.3'
+gem 'draper'
+gem 'kaminari'
+gem 'meta-tags'
+gem 'metainspector'
+gem 'pg_search'
+gem 'postrank-uri' # clear links
+gem 'rack-mini-profiler'
+gem 'seed-fu', '~> 2.3'
+gem 'sentry-raven'
+gem 'simple_form'
+gem 'slim'
+gem 'validate_url'
 gem 'webpacker', '~> 3.0'
 gem "koala"
-gem 'discourse_api'
-gem 'meta-tags'
-gem "sentry-raven"
-gem 'validate_url'
-gem 'rack-mini-profiler'
-gem 'draper'
-gem 'postrank-uri' # clear links
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
