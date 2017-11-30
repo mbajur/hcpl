@@ -1,10 +1,13 @@
 class Api::Internal::V1::PostsController < Api::InternalController
 
   def fetch_title
-    page       = MetaInspector.new(params[:link])
-    classifier = PageClassifier::Perform.new(page).call
+    outcome = FetchLinkData.run(params)
 
-    render json: { title: page.best_title, media_type: classifier.media_type, media_guid: classifier.media_guid }
+    if outcome.valid?
+      render json: outcome.result
+    else
+      render json: { errors: outcome.errors }, status: :bad_request
+    end
   end
 
   def toggle_vote
