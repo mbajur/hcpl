@@ -23,9 +23,6 @@ class Posts::Create < ActiveInteraction::Base
   def execute
     post = Post.new(inputs)
 
-    # Remove junk from links
-    post.link = clear_link(post.link)
-
     if post.save
       cast_vote(post)
       PostScrapperJob.perform_later(post.id)

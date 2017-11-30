@@ -2,7 +2,7 @@
   form
 
     .alert.alert-danger.mb-4(v-if="fullErrorMessages.length > 0")
-      h4.alert-heading Coś poszło nie tak:
+      h5.alert-heading Coś poszło nie tak:
       ul.mb-0
         li(v-for="error in fullErrorMessages")
           | {{ error }}
