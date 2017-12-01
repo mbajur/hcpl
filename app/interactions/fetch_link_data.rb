@@ -4,7 +4,7 @@ class FetchLinkData < ActiveInteraction::Base
   validates :link, presence: true, url: { message: 'wydaje się być niepoprawny' }
 
   def execute
-    data
+    scraped_data
   end
 
   private
@@ -14,13 +14,13 @@ class FetchLinkData < ActiveInteraction::Base
     ['fetch_link_data', md5].join('/')
   end
 
-  def data
+  def scraped_data
     Rails.cache.fetch(cache_key, expires_in: 10.minutes) do
       page       = MetaInspector.new(inputs[:link])
       classifier = PageClassifier::Perform.new(page).call
 
       {
-        title: page.best_title,
+        title:      page.best_title,
         media_type: classifier.media_type,
         media_guid: classifier.media_guid,
       }
