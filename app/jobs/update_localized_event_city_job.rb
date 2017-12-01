@@ -2,10 +2,10 @@ class UpdateLocalizedEventCityJob < ApplicationJob
   queue_as :default
 
   def perform(post_id, country, city)
-    @post = Post.find(post_id)
+    @post       = Post.find(post_id)
     @post_event = @post.event
-    @city = city
-    @country = country
+    @city       = city
+    @country    = country
 
     return false unless @post_event.present?
 

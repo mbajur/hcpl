@@ -6,4 +6,9 @@ namespace :hcpl do
     end
   end
 
+  task build_cities: :environment do
+    PostEvent.where.not(city: '').where.not(country_code: '').each do |pe|
+      City.find_or_create_by!(name: pe.city, country_code: pe.country_code)
+    end
+  end
 end

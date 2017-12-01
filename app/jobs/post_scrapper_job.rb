@@ -5,10 +5,6 @@ class PostScrapperJob < ApplicationJob
     @post = Post.find(post_id)
     @page = MetaInspector.new(@post.link)
 
-    @post.update_attributes!(
-      link: @page.url
-    )
-
     save_thumb
     save_media
     save_event
