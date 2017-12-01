@@ -43,8 +43,10 @@ gem 'discourse_api'
 gem 'dragonfly', '~> 1.1.3'
 gem 'draper'
 gem 'kaminari'
+gem 'koala'
 gem 'meta-tags'
 gem 'metainspector'
+gem 'nominatim'
 gem 'pg_search'
 gem 'postrank-uri' # clear links
 gem 'rack-mini-profiler'
@@ -54,7 +56,6 @@ gem 'simple_form'
 gem 'slim'
 gem 'validate_url'
 gem 'webpacker', '~> 3.0'
-gem "koala"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

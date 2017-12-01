@@ -9,7 +9,6 @@ class SyncPostEventDataJob < ApplicationJob
 
     attrs = {
       beginning_at: (facebook_event['start_time'] rescue nil),
-      city:         (facebook_event['place']['location']['city'] rescue nil),
       synced_at:    Time.zone.now
     }
 
@@ -19,6 +18,12 @@ class SyncPostEventDataJob < ApplicationJob
     else
       @post.event.update_attributes! attrs
     end
+
+    UpdateLocalizedEventCityJob.perform_later(
+      @post.id,
+      facebook_event_country,
+      facebook_event_city,
+    )
   end
 
   private
@@ -40,6 +45,14 @@ class SyncPostEventDataJob < ApplicationJob
     end
 
     Koala::Facebook::API.new(token)
+  end
+
+  def facebook_event_city
+    facebook_event['place']['location']['city'] rescue nil
+  end
+
+  def facebook_event_country
+    facebook_event['place']['location']['country'] rescue nil
   end
 
 end
