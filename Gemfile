@@ -76,6 +76,7 @@ end
 group :production do
   # gem 'dragonfly-s3_data_store'
   # gem 'mime-types'
+  gem 'lograge'
 end
 
 group :deployment do
