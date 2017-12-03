@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :posts
     resources :post_events
     resources :votes
+    resources :cities
 
     root to: "tags#index"
   end
