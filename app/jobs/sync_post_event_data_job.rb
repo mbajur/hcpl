@@ -5,9 +5,6 @@ class SyncPostEventDataJob < ApplicationJob
     @post = Post.find(post_id)
     return false if @post.media_type != 'facebook_event'
 
-    logger.info "Facebook event data: #{facebook_event.inspect}"
-    logger.info 'Saving facebook event data'
-
     attrs = {
       beginning_at:     (facebook_event['start_time'] rescue nil),
       country_code:     facebook_event_country_code,
@@ -15,7 +12,8 @@ class SyncPostEventDataJob < ApplicationJob
       synced_at:        Time.zone.now
     }
 
-    logger.info "Data to be saved: #{attrs.inspect}"
+    logger.debug "Saving facebook event data:"
+    logger.debug "#{attrs.inspect}"
 
     # Move that to #find_or_initialize_by
     if @post.event.nil?
