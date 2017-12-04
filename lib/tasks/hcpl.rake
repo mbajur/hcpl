@@ -24,6 +24,7 @@ namespace :hcpl do
     general_avg = PostEvent.upcoming.average(:attendants_count)
     PostEvent.upcoming.each do |pe|
       city = City.find_by(name: pe.city, country_code: pe.country_code)
+      next unless city.present?
       city_events = city.post_events.upcoming
 
       base_score = city_events.count >= 2 ? city_events.average(:attendants_count) : general_avg
