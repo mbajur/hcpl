@@ -7,13 +7,17 @@ class SyncPostEventDataJob < ApplicationJob
 
     attrs = {
       beginning_at:     (facebook_event['start_time'] rescue nil),
-      country_code:     facebook_event_country_code,
       attendants_count: facebook_event_attending_count,
       synced_at:        Time.zone.now
     }
 
-    logger.debug "Saving facebook event data:"
-    logger.debug "#{attrs.inspect}"
+    if facebook_event_lat.present? && facebook_event_lon.present?
+      attrs[:city]         = geo_results.address.city
+      attrs[:country_code] = geo_results.address.country_code
+    end
+
+    logger.debug 'Saving facebook event data:'
+    logger.debug attrs.inspect
 
     # Move that to #find_or_initialize_by
     if @post.event.nil?
@@ -21,12 +25,6 @@ class SyncPostEventDataJob < ApplicationJob
     else
       @post.event.update_attributes! attrs
     end
-
-    UpdateLocalizedEventCityJob.perform_later(
-      @post.id,
-      facebook_event_country,
-      facebook_event_city
-    ) if facebook_event_country.present? && facebook_event_city.present?
   end
 
   private
@@ -34,7 +32,7 @@ class SyncPostEventDataJob < ApplicationJob
   def facebook_event
     @facebook_event ||= graph.get_connection(
       @post.media_guid,
-      '?fields=id,attending_count,start_time,place{location{city,country,country_code}}'
+      '?fields=id,attending_count,start_time,place{name,location{latitude,longitude}}'
     )
   end
 
@@ -53,20 +51,33 @@ class SyncPostEventDataJob < ApplicationJob
     Koala::Facebook::API.new(token)
   end
 
-  def facebook_event_city
-    facebook_event['place']['location']['city'] rescue nil
+  def facebook_event_lat
+    facebook_event['place']['location']['latitude'].to_s rescue nil
   end
 
-  def facebook_event_country
-    facebook_event['place']['location']['country'] rescue nil
-  end
-
-  def facebook_event_country_code
-    facebook_event['place']['location']['country_code'] rescue nil
+  def facebook_event_lon
+    facebook_event['place']['location']['longitude'].to_s rescue nil
   end
 
   def facebook_event_attending_count
     facebook_event['attending_count'] rescue nil
+  end
+
+  def nominatim_cache_key
+    latitude_md5  = Digest::MD5.new.hexdigest(facebook_event_lat)
+    longitude_md5 = Digest::MD5.new.hexdigest(facebook_event_lon)
+
+    ['nominatim', latitude_md5, longitude_md5].join('/')
+  end
+
+  def geo_results
+    Rails.cache.fetch(nominatim_cache_key, expires_in: 10.minutes) do
+      Nominatim::Reverse
+        .new
+        .lat(facebook_event_lat)
+        .lon(facebook_event_lon)
+        .fetch
+    end
   end
 
 end
