@@ -1,11 +1,4 @@
 GIT
-  remote: https://github.com/Rykian/clockwork.git
-  revision: 11f80a0f206d17060b07a55bffec23e935279d1c
-  specs:
-    clockwork (2.0.2)
-      tzinfo
-
-GIT
   remote: https://github.com/mbleigh/acts-as-taggable-on.git
   revision: 4d9a10c25e106bd2467662baea58510a17809ca2
   specs:
@@ -359,7 +352,6 @@ DEPENDENCIES
   byebug
   capistrano
   capose
-  clockwork!
   coffee-rails (~> 4.2)
   discourse_api
   dotenv-rails

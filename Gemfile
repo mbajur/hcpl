@@ -56,7 +56,6 @@ gem 'simple_form'
 gem 'slim'
 gem 'validate_url'
 gem 'webpacker', '~> 3.0'
-gem 'clockwork', github: 'Rykian/clockwork'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
