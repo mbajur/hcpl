@@ -15,14 +15,21 @@ namespace :hcpl do
 
     puts 'Calculating cities scores...'
     City.all.each do |city|
-      attendants = PostEvent.upcoming.where(city: city.name).map(&:attendants_count)
-
-      sorted = attendants.sort
-      len = sorted.length
-      next if len == 0
-
-      score = (sorted[(len - 1) / 2] + sorted[len / 2]) / 2.0
+      score = PostEvent.upcoming.where(city: city.name).average(:attendants_count)
       city.update_attribute(:score, score)
+    end
+    puts 'done.'
+
+    puts 'Calculating events scores...'
+    general_avg = PostEvent.upcoming.average(:attendants_count)
+    PostEvent.upcoming.each do |pe|
+      city = City.find_by(name: pe.city, country_code: pe.country_code)
+      city_events = city.post_events.upcoming
+
+      base_score = city_events.count >= 2 ? city_events.average(:attendants_count) : general_avg
+      score = pe.attendants_count - base_score
+
+      pe.update_attribute(:score, score)
     end
     puts 'done.'
   end

@@ -14,6 +14,7 @@ class PostEventDashboard < Administrate::BaseDashboard
     city: Field::String,
     country_code: Field::String,
     attendants_count: Field::Number,
+    score: Field::Number,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     synced_at: Field::DateTime,
@@ -31,6 +32,7 @@ class PostEventDashboard < Administrate::BaseDashboard
     :city,
     :country_code,
     :attendants_count,
+    :score,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -42,6 +44,7 @@ class PostEventDashboard < Administrate::BaseDashboard
     :city,
     :country_code,
     :attendants_count,
+    :score,
     :created_at,
     :updated_at,
     :synced_at,
