@@ -9,6 +9,10 @@ html
       .container.main
         .row.justify-content-center
           .col-9.main-content
+            - if content_for?(:before_content)
+              .main-content-inner.mb-3
+                = yield :before_content
+
             .main-content-inner
               - if content_for?(:content_nav)
                 .main-content-nav
