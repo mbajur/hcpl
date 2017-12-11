@@ -13,6 +13,8 @@
  *= require_self
  */
 
+@import './components/hot_events';
+
 body {
   font-family: "Open Sans", sans-serif;
   background: #eee;
@@ -34,11 +36,12 @@ footer {
 
 /*  */
 
-.text-truncate {
-  max-width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+// .text-truncate {
+//   max-width: 100%;
+// }
+
+.fw-bold {
+  font-weight: 600;
 }
 
 .btn-tag {
@@ -72,9 +75,9 @@ $post-voted-color: #28a745;
 }
 
 .btn-post-vote--voted {
-  color: $post-voted-color;
+  color: $post-voted-color !important;
   background-color: rgba($post-voted-color, 0.2);
-  border-color: $post-voted-color;
+  border-color: $post-voted-color !important;
 
   &::before {
     border-bottom-color: $post-voted-color !important;

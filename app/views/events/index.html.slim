@@ -1,3 +1,7 @@
+= content_for :before_content do
+  - unless params[:q].present?
+    = render 'events/hot_widget'
+
 = content_for :content_nav do
   = render 'events/index_content_nav'
 
