@@ -13,7 +13,7 @@ class SyncPostEventDataJob < ApplicationJob
 
     if facebook_event_lat.present? && facebook_event_lon.present?
       attrs[:city]         = geo_results.address.city
-      attrs[:country_code] = geo_results.address.country_code
+      attrs[:country_code] = geo_results.address.country_code.try(:upcase)
     end
 
     logger.debug 'Saving facebook event data:'
