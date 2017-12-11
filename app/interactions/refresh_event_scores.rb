@@ -22,8 +22,12 @@ class RefreshEventScores < ActiveInteraction::Base
 
       base_score = city_events.count >= 2 ? city_events.average(:attendants_count) : general_avg
       score = pe.attendants_count - base_score
+      is_hot = score > base_score * 3/4
 
-      pe.update_attribute(:score, score)
+      pe.update_attributes(
+        score:  score,
+        is_hot: is_hot
+      )
     end
     Rails.logger.info 'done.'
   end

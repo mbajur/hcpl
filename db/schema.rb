@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171204083726) do
+ActiveRecord::Schema.define(version: 20171211191218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20171204083726) do
     t.integer "attendants_count", default: 0
     t.string "country_code"
     t.integer "score", default: 0
+    t.boolean "is_hot", default: false
     t.index ["post_id"], name: "index_post_events_on_post_id"
   end
 

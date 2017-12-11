@@ -7,7 +7,7 @@ class PostEvent < ApplicationRecord
   scope :upcoming, -> { where('beginning_at > ?', Time.zone.now.beginning_of_day) }
   scope :past, -> { where('beginning_at < ?', Time.zone.now.beginning_of_day) }
   scope :this_week, -> { where('beginning_at > ?', Time.zone.now.beginning_of_week).where('beginning_at <= ?', Time.zone.now.end_of_week) }
-  scope :upcoming_hot, -> { where('beginning_at > ?', Time.zone.now.beginning_of_day).where('beginning_at <= ?', Time.zone.now + 15.days) }
+  scope :upcoming_hot, -> { where('beginning_at > ?', Time.zone.now.beginning_of_day).where('beginning_at <= ?', Time.zone.now + 15.days).where(is_hot: true) }
 
   pg_search_scope :search, against: :city, associated_against: { post: :title }, using: { tsearch: { prefix: true } }
 

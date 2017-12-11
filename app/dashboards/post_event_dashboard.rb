@@ -18,6 +18,7 @@ class PostEventDashboard < Administrate::BaseDashboard
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     synced_at: Field::DateTime,
+    is_hot: Field::Boolean,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -33,6 +34,7 @@ class PostEventDashboard < Administrate::BaseDashboard
     :country_code,
     :attendants_count,
     :score,
+    :is_hot
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -45,6 +47,7 @@ class PostEventDashboard < Administrate::BaseDashboard
     :country_code,
     :attendants_count,
     :score,
+    :is_hot,
     :created_at,
     :updated_at,
     :synced_at,
@@ -58,6 +61,7 @@ class PostEventDashboard < Administrate::BaseDashboard
     :beginning_at,
     :city,
     :country_code,
+    :is_hot,
     :synced_at,
   ].freeze
 
