@@ -36,8 +36,8 @@ class PostsController < ApplicationController
   def show
     @post = Post.find_by!(token: params[:token])
     @comment = Comment.new(post: @post)
-    @similar_events = PostEvent.where(city: @post.event.city)
-                               .where.not(id: @post.event.id)
+    @similar_events = PostEvent.where(city: @post.event.try(:city))
+                               .where.not(id: @post.event.try(:id))
                                .includes(:post)
                                .upcoming
                                .upcoming_first
