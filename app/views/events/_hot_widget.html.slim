@@ -5,14 +5,18 @@
               .upcoming_first \
               .limit(2)
 
+  - col_class = events.length > 1 ? 'col-6' : 'col-12'
+
   - if events.length > 0
     .main-content-inner.p-3.hot-events
-      h6.mb-3.fw-bold Popularne nadchodzące wydarzenia
+      h6.mb-3.fw-bold 🔥 &nbsp;Popularne nadchodzące wydarzenia
 
       .row.no-gutters
         - events.each do |event|
-          .col-6
-            .card(style="background-image: url(#{event.post.thumb.thumb('397x225#').url})")
+          - thumb_size = events.length > 1 ? '397x225#' : '793x225#'
+
+          div(class=col_class)
+            .card(style="background-image: url(#{event.post.thumb.thumb(thumb_size).url})")
               .card-body
                 .hot-events-item-left
                   .posts-item-vote-wrap

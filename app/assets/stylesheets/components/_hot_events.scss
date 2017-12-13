@@ -27,7 +27,8 @@
   float: left;
 }
 
-.hot-events > .row > .col-6 {
+.hot-events > .row > .col-6,
+.hot-events > .row > .col-12 {
   padding-right: 1em;
 
   &:last-child {
