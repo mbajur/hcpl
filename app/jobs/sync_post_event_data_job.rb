@@ -32,7 +32,7 @@ class SyncPostEventDataJob < ApplicationJob
   def facebook_event
     @facebook_event ||= graph.get_connection(
       @post.media_guid,
-      '?fields=id,attending_count,start_time,place{name,location{latitude,longitude}}'
+      '?fields=id,attending_count,start_time,place{name,location{latitude,longitude}},cover'
     )
   end
 

@@ -14,7 +14,7 @@ class Posts::Create < ActiveInteraction::Base
 
   validate :link_or_description_present
 
-  set_callback :validate, :before, :clear_link
+  set_callback :validate, :before, :sanitize_link
 
   def to_model
     Post.new
@@ -46,7 +46,7 @@ class Posts::Create < ActiveInteraction::Base
     errors.add(:base, 'Post musi posiadać link lub tekst')
   end
 
-  def clear_link
-    self.link = PostRank::URI.clean(link) if link.present?
+  def sanitize_link
+    self.link = LinkSanitizer.new(link).call if link.present?
   end
 end

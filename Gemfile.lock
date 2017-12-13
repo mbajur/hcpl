@@ -107,6 +107,7 @@ GEM
     crass (1.0.2)
     datetime_picker_rails (0.0.7)
       momentjs-rails (>= 2.8.1)
+    diff-lcs (1.3)
     discourse_api (0.18.0)
       faraday (~> 0.9)
       faraday_middleware (~> 0.10)
@@ -272,6 +273,23 @@ GEM
       ffi (>= 0.5.0, < 2)
     ref (2.0.0)
     request_store (1.3.2)
+    rspec-core (3.6.0)
+      rspec-support (~> 3.6.0)
+    rspec-expectations (3.6.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.6.0)
+    rspec-mocks (3.6.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.6.0)
+    rspec-rails (3.6.0)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (~> 3.6.0)
+      rspec-expectations (~> 3.6.0)
+      rspec-mocks (~> 3.6.0)
+      rspec-support (~> 3.6.0)
+    rspec-support (3.6.0)
     ruby_dep (1.5.0)
     sass (3.5.3)
       sass-listen (~> 4.0.0)
@@ -300,6 +318,8 @@ GEM
       tilt (>= 1.3.3, < 2.1)
     spring (2.0.2)
       activesupport (>= 4.2)
+    spring-commands-rspec (1.0.4)
+      spring (>= 0.9.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
       spring (>= 1.2, < 3.0)
@@ -381,12 +401,14 @@ DEPENDENCIES
   rack-mini-profiler
   rails (~> 5.1.4)
   rails-assets-sticky-sidebar!
+  rspec-rails (~> 3.6)
   sass-rails (~> 5.0)
   seed-fu (~> 2.3)
   sentry-raven
   simple_form
   slim
   spring
+  spring-commands-rspec
   spring-watcher-listen (~> 2.0.0)
   therubyracer
   turbolinks (~> 5)
