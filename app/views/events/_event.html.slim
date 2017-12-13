@@ -1,5 +1,6 @@
 - auto_show = auto_show == true
 - post = event.post
+- hide_thumb = hide_thumb == true
 
 li.events-item
   post-bookmark-btn(
@@ -17,7 +18,7 @@ li.events-item
 
     .media-body
       .media
-        - if post.thumb.present?
+        - if post.thumb.present? && !hide_thumb
           a.events-item-thumb(href=post.path style="background-image: url(#{post.thumb.thumb('83x65#').url})")
 
         .media-body.posts-item-content

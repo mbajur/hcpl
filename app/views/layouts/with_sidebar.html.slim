@@ -1,3 +1,6 @@
+- main_content_class = @main_content_class || 'col-9'
+- sidebar_class = @sidebar_class || 'col'
+
 html
   head
     = render '/layouts/head'
@@ -8,7 +11,7 @@ html
 
       .container.main
         .row.justify-content-center
-          .col-9.main-content
+          .main-content(class=main_content_class)
             - if content_for?(:before_content)
               .main-content-inner.mb-3
                 = yield :before_content
@@ -28,7 +31,7 @@ html
 
 
           - unless @sidebar_disabled
-            .col.main-sidebar(data-js-sticky-sidebar)
+            .main-sidebar(data-js-sticky-sidebar class=sidebar_class)
               .main-sidebar__inner
                 - if content_for?(:sidebar)
                   = yield :sidebar

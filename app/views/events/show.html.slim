@@ -1,0 +1,76 @@
+- @main_content_class = 'col-7'
+- @sidebar_class = 'col-3'
+
+= content_for :content_body do
+  = image_tag @post.thumb.thumb('825x300#').url, width: '100%', height: '231'
+
+  ul.list-unstyled.posts-list
+    = render 'events/event', event: @post.event, hide_thumb: true
+
+  .post-comment-form
+    = simple_form_for @comment do |f|
+      = f.hidden_field :post_id
+      .form-group
+        = f.input :body, label: false, input_html: { class: 'form-control', placeholder: 'Wpisz swój komentarz tutaj...', rows: 1 }
+
+      .form-group
+        = f.button :submit, class: 'btn btn-outline-secondary btn-sm'
+
+  .post-comments
+    header.post-comments-header
+      .row
+        .col-4
+          h2 #{@post.comments_count} komentarzy
+
+        .col
+          ul.nav.justify-content-end.d-none
+            li.nav-item: a.nav-link.active(href="#") Najlepsze
+            li.nav-item: a.nav-link(href="#") Najgorsze
+            li.nav-item: a.nav-link(href="#") Najnowsze
+            li.nav-item: a.nav-link(href="#") Najstarsze
+
+    ul.post-comments-list.list-unstyled
+      - @post.comments.each do |comment|
+        li.post-comment
+          .post-comment-inner
+            header.post-comment-header
+              span.post-comment-header-main
+                a(href="#")
+                  = image_tag 'https://secure.gravatar.com/avatar/c2a71f10051e9666ac3732daf0ab18cb?size=200&default=mm', height: 12
+                  | mbajur
+              span.post-comment-header-sub
+                | #{time_ago_in_words(comment.created_at)} temu
+
+            .post-comment-body
+              = simple_format comment.body
+
+            footer.post-comment-footer
+              .post-comment-vote-controls
+              span.post-comment-vote-points 10 punktów
+
+= content_for :sidebar do
+  .sidebar-similar-events
+    h3.mb-4 Inne wydarzenia w mieście
+
+    - if @similar_events.length == 0
+      p Brak wydarzeń
+
+    - @similar_events.each do |event|
+      .row
+        .col-4
+          = link_to event.post.path do
+            = image_tag event.post.thumb.thumb('80x60#').url, size: '80x60'
+
+        .col-8
+          ul.list-inline
+            li.list-inline-item
+              event-beginning-at(date-time=event.beginning_at.iso8601)
+
+          h4.text-truncate(title=event.post.title)
+            = link_to event.post.title, event.post.path
+
+          ul.list-inline.mb-0
+            - if event.city.present?
+              li.list-inline-item
+                strong
+                  = link_to event.city, events_path(q: event.city)

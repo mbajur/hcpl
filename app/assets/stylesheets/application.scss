@@ -14,6 +14,7 @@
  */
 
 @import './components/hot_events';
+@import './components/sidebar_similar_events';
 
 body {
   font-family: "Open Sans", sans-serif;
@@ -267,6 +268,7 @@ $main-sidebar-sity-count-size: 25px;
 .main-content-inner {
   border-radius: 3px;
   background: #fff;
+  overflow: hidden;
 }
 
 .main-content-nav {

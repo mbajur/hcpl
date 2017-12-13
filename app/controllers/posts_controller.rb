@@ -36,8 +36,17 @@ class PostsController < ApplicationController
   def show
     @post = Post.find_by!(token: params[:token])
     @comment = Comment.new(post: @post)
+    @similar_events = PostEvent.where(city: @post.event.city)
+                               .where.not(id: @post.event.id)
+                               .includes(:post)
+                               .upcoming
+                               .upcoming_first
+                               .limit(5)
+
+    template = @post.media_type == 'facebook_event' ? 'events/show' : 'posts/show'
 
     resync_post_event_data
+    render template
   end
 
   def search
