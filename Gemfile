@@ -64,6 +64,7 @@ group :development, :test do
   gem 'faker'
   gem 'dotenv-rails'
   gem 'rspec-rails', '~> 3.6'
+  gem 'rspec_junit_formatter'
 end
 
 group :development do

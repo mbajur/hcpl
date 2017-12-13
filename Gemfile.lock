@@ -290,6 +290,9 @@ GEM
       rspec-mocks (~> 3.6.0)
       rspec-support (~> 3.6.0)
     rspec-support (3.6.0)
+    rspec_junit_formatter (0.2.3)
+      builder (< 4)
+      rspec-core (>= 2, < 4, != 2.12.0)
     ruby_dep (1.5.0)
     sass (3.5.3)
       sass-listen (~> 4.0.0)
@@ -402,6 +405,7 @@ DEPENDENCIES
   rails (~> 5.1.4)
   rails-assets-sticky-sidebar!
   rspec-rails (~> 3.6)
+  rspec_junit_formatter
   sass-rails (~> 5.0)
   seed-fu (~> 2.3)
   sentry-raven
