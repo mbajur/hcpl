@@ -25,11 +25,12 @@
                 | Pobierz tytuł
 
     .form-group.row
-      label.col-sm-3.col-form-label.post_link(for="post_title") Tytuł posta
+      label.col-sm-3.col-form-label.post_link(for="post_title")
+        | {{ titleLabel }}
       .col-sm-9
         input.form-control(type="text" name="post[title]" id="post_title" v-model="form.title")
 
-    .form-group.row
+    .form-group.row(v-if="!hideTags")
       label.col-sm-3.col-form-label.post_link(for="post_tag_list") Tagi
       .col-sm-9
         input.form-control(type="hidden" :value="form.tag_list" name="post[tag_list]" id="post_tag_list")
@@ -50,7 +51,7 @@
         )
         small.form-text.text-muted Wybierz do pięciu tagów opisujących ten post
 
-    .form-group.row
+    .form-group.row(v-if="!hideDescription")
       label.col-sm-3.col-form-label.post_link(for="post_description") Tekst
       .col-sm-9
         textarea.form-control(type="text" name="post[description]" id="post_description" placeholder="Niewymagany jeśli wysyłasz linka" v-model="form.description")
@@ -83,6 +84,18 @@ export default {
         tag_list: '',
         description: ''
       }}
+    },
+    hideTags: {
+      type: Boolean,
+      default: false
+    },
+    hideDescription: {
+      type: Boolean,
+      default: false
+    },
+    titleLabel: {
+      type: String,
+      default: 'Tytuł posta'
     }
   },
 

@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   post :add, to: 'posts#create', as: :create_post
   get :events, to: 'events#index', as: :events
   get 'events/past', to: 'events#past', as: :past_events
+  get 'events/add', to: 'events#new', as: :new_event
+  post 'events/add', to: 'events#create', as: :create_event
 
   get 't/:slug', to: 'tags#show', as: :tag
   get 'p/:token/:slug', to: 'posts#show', as: :post

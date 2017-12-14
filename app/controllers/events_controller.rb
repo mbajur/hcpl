@@ -15,6 +15,28 @@ class EventsController < ApplicationController
     @cities = cities_stats_for(PostEvent.past)
   end
 
+  def new
+    @post = Posts::Create.new(
+      link:  params[:link],
+      title: params[:title],
+    )
+  end
+
+  def create
+    res = redirect_to_post_if_exists
+    return false unless res
+
+    @post = Posts::Create.run(
+      posts_create_params.merge!(user: current_user, tag_list: 'Wydarzenia')
+    )
+
+    if @post.valid?
+      redirect_to @post.result.path, notice: 'Wydarzenie utworzone pomyślnie!'
+    else
+      render :new
+    end
+  end
+
   private
 
   def fetch_events
@@ -41,6 +63,10 @@ class EventsController < ApplicationController
     res.each { |c| c[:percent] = c[:count].to_f / sum.to_f * 100.0 }
 
     res
+  end
+
+  def posts_create_params
+    params.require(:post).permit(:link, :title)
   end
 
 end

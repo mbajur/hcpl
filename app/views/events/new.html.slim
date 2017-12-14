@@ -1,0 +1,24 @@
+- @sidebar_disabled = true
+
+= content_for :content_body do
+  .p-4
+    h1.h4.mb-3
+      | Dodawanie wydarzenia
+
+    p.mb-4
+      | Wyślij link do wydarzenia na facebooku. Sprawdź wytyczne aby mieć
+      |  pewność, że to co wrzucasz jest odpowiednie dla tej społeczności.
+
+    hr.mb-4
+
+    new-post-form(
+      action=create_event_path
+      method="post"
+      csrf-token=form_authenticity_token
+      title-label="Nazwa wydarzenia"
+      :post={link: @post.link, title: @post.title, tag_list: @post.tag_list, description: @post.description}.to_json
+      :full-error-messages=@post.errors.full_messages
+      :tags=ActsAsTaggableOn::Tag.where(is_primary: true).map(&:name).to_json
+      :hide-tags="true"
+      :hide-description="true"
+    )

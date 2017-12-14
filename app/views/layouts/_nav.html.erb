@@ -34,7 +34,14 @@
           </li>
         </ul>
 
-        <a href="<%= new_post_path %>" class="btn btn-outline-light ml-md-3">Dodaj post +</a>
+        <div class="dropdown ml-md-3">
+          <a href="<%= new_post_path %>" class="btn btn-outline-light dropdown-toggle" data-toggle="dropdown">+ Dodaj</a>
+
+          <div class="dropdown-menu dropdown-menu-right">
+            <a href="<%= new_post_path %>" class="dropdown-item">Link lub tekst</a>
+            <a href="<%= new_event_path %>" class="dropdown-item">Wydarzenie</a>
+          </div>
+        </div>
       </div>
     </div>
   </nav>
