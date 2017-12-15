@@ -35,9 +35,6 @@ ENV RAILS_ENV production
 ENV RACK_ENV production
 ENV RAILS_SERVE_STATIC_FILES true
 
-# Set expose port
-EXPOSE 3000
-
 # Copy the main application.
 COPY . ./
 
@@ -47,10 +44,11 @@ RUN SECRET_KEY_BASE=fake \
   DATABASE_URL=postgres://fake@fake:5432/fake \
   bundle exec rake assets:precompile
 
-EXPOSE 3000
+# Set expose port
+# EXPOSE 3000
 
 # Setup entrypoint
 # ENTRYPOINT ["./docker/production/entrypoint.sh"]
 
 # Start puma
-CMD bundle exec rails s -b 0.0.0.0 -p 3000
+CMD bundle exec rails s -b 0.0.0.0 -p $PORT
