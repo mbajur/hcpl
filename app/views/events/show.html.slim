@@ -5,7 +5,7 @@
   = image_tag @post.thumb.thumb('825x300#').url, width: '100%', height: '231'
 
   ul.list-unstyled.posts-list
-    = render 'events/event', event: @post.event, hide_thumb: true
+    = render 'events/event', event: @post.event, hide_thumb: true, show_cta: true
 
   .post-comment-form
     = simple_form_for @comment do |f|

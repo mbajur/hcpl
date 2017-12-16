@@ -1,6 +1,7 @@
 - auto_show = auto_show == true
 - post = event.post
 - hide_thumb = hide_thumb == true
+- show_cta = show_cta == true
 
 li.events-item
   post-bookmark-btn(
@@ -52,3 +53,10 @@ li.events-item
 
             li.list-inline-item
               a(href=build_post_path(post)) #{post.comments_count} komentarze
+
+  - if show_cta
+    .text-center.py-4.mt-3
+      a.btn.btn-light.btn-cta(href=event.post.link target="_blank")
+        .media
+          .media-body
+            | Zobacz na Facebooku &nearr;
