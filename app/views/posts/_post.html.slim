@@ -1,5 +1,6 @@
 - auto_show = auto_show == true
 - user = post.user.decorate
+- post_decorated = post.decorate
 
 li.posts-item
   post-bookmark-btn(
@@ -27,7 +28,7 @@ li.posts-item
 
         .media-body.posts-item-content
           h3.posts-item-title
-            a(href=post.link target="_blank")
+            a(href=post_decorated.href target=(post.link.present? ? "_blank" : nil))
               = post.title
 
             ul.list-inline.mb-0
