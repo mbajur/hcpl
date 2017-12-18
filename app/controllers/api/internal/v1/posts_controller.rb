@@ -1,4 +1,5 @@
 class Api::Internal::V1::PostsController < Api::InternalController
+  before_action :authenticate_user!, only: [:toggle_vote, :toggle_bookmark]
 
   def fetch_title
     outcome = FetchLinkData.run(params)
