@@ -3,6 +3,8 @@ class PostScrapperJob < ApplicationJob
 
   def perform(post_id)
     @post = Post.find(post_id)
+    return false unless @post.link.present?
+
     @page = MetaInspector.new(@post.link)
 
     save_thumb
