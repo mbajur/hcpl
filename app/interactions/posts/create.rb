@@ -1,4 +1,14 @@
 class Posts::Create < ActiveInteraction::Base
+
+  class LinkNotUniqueError < ArgumentError
+    attr_reader :existing_post
+
+    def initialize(msg, existing_post)
+      @existing_post = existing_post
+      super(msg)
+    end
+  end
+
   string :link, default: nil
   string :title, default: nil
   string :description, default: nil
@@ -23,10 +33,10 @@ class Posts::Create < ActiveInteraction::Base
   def execute
     post = Post.new(inputs)
 
+    check_link_uniqueness!
+
     if post.save
-      cast_vote(post)
-      PostScrapperJob.perform_later(post.id)
-      user.add_karma
+      after_create(post)
     else
       errors.merge!(post.errors)
     end
@@ -35,6 +45,11 @@ class Posts::Create < ActiveInteraction::Base
   end
 
   private
+
+  def check_link_uniqueness!
+    existing = Post.find_by(link: link)
+    raise LinkNotUniqueError.new(nil, existing) if existing.present?
+  end
 
   def cast_vote(post)
     post.votes.create(user_id: inputs[:user].id)
@@ -48,5 +63,12 @@ class Posts::Create < ActiveInteraction::Base
 
   def sanitize_link
     self.link = LinkSanitizer.new(link).call if link.present?
+  end
+
+  def after_create(post)
+    cast_vote(post)
+    user.add_karma
+
+    PostScrapperJob.perform_later(post.id)
   end
 end

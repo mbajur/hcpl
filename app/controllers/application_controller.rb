@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
 
   before_action :setup_rack_miniprofiler
 
+rescue_from Posts::Create::LinkNotUniqueError, with: :handle_posts_create_link_not_unique_error
+
   def index; end
 
   private
@@ -36,14 +38,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # If post with given link exists, redirect user to it with proper notice
-  def redirect_to_post_if_exists
-    return true unless posts_create_params[:link].present?
-
-    existing_post = Post.find_by(link: posts_create_params[:link])
-    return true unless existing_post.present?
-
-    redirect_to existing_post.path, notice: 'Link był już dodany wcześniej. Zostałeś do niego przekierowany.'
+  def handle_posts_create_link_not_unique_error(e)
+    existing = e.existing_post
+    redirect_to existing.path, notice: 'Link był już dodany wcześniej. Zostałeś do niego przekierowany.'
     return false
   end
 end

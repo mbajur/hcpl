@@ -62,9 +62,6 @@ class PostsController < ApplicationController
   end
 
   def create
-    res = redirect_to_post_if_exists
-    return false unless res
-
     @post = Posts::Create.run(
       posts_create_params.merge!(user: current_user)
     )
