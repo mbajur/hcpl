@@ -1,8 +1,10 @@
 - @main_content_class = 'col-7'
 - @sidebar_class = 'col-3'
+- poster = @post.event.poster.present? ? @post.event.poster : @post.thumb
 
 = content_for :content_body do
-  = image_tag @post.thumb.thumb('825x300#').url, width: '100%', height: '231'
+  - if poster.present?
+    = image_tag poster.thumb('825x300#').url, width: '100%', height: '231'
 
   ul.list-unstyled.posts-list
     = render 'events/event', event: @post.event, hide_thumb: true, show_cta: true

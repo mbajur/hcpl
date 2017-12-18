@@ -16,6 +16,8 @@ class SyncPostEventDataJob < ApplicationJob
       attrs[:country_code] = geo_results.address.country_code.try(:upcase)
     end
 
+    attrs[:poster_url] = facebook_event_poster if facebook_event_poster.present?
+
     logger.debug 'Saving facebook event data:'
     logger.debug attrs.inspect
 
@@ -63,6 +65,10 @@ class SyncPostEventDataJob < ApplicationJob
     facebook_event['attending_count'] rescue nil
   end
 
+  def facebook_event_poster
+    facebook_event['cover']['source'] rescue nil
+  end
+
   def nominatim_cache_key
     latitude_md5  = Digest::MD5.new.hexdigest(facebook_event_lat)
     longitude_md5 = Digest::MD5.new.hexdigest(facebook_event_lon)
@@ -79,5 +85,4 @@ class SyncPostEventDataJob < ApplicationJob
         .fetch
     end
   end
-
 end

@@ -3,6 +3,8 @@ class PostEvent < ApplicationRecord
 
   belongs_to :post
 
+  dragonfly_accessor :poster
+
   scope :upcoming_first, -> { order(beginning_at: :asc) }
   scope :upcoming, -> { where('beginning_at > ?', Time.zone.now.beginning_of_day) }
   scope :past, -> { where('beginning_at < ?', Time.zone.now.beginning_of_day) }
