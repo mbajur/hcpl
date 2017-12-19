@@ -3,6 +3,7 @@ class Post < ApplicationRecord
 
   HOTTNESS_TIME_INTERVAL = 3
   HOTTNESS_COMMENTS_MODIFIER = 10
+  HOTTNESS_TIME_WINDOW = 3.hour.to_i
 
   PREVIEWABLE_MEDIA_TYPES = %w[youtube bandcamp_album].freeze
 
@@ -43,7 +44,7 @@ class Post < ApplicationRecord
   #
   def self.hot
     Post
-      .select("posts.*, votes_count + comments_count * #{HOTTNESS_COMMENTS_MODIFIER} + ((EXTRACT(EPOCH from created_at) - EXTRACT(EPOCH from (now() - interval '#{HOTTNESS_TIME_INTERVAL}' day))::integer) / 3600) as hottness")
+      .select("posts.*, votes_count + comments_count * #{HOTTNESS_COMMENTS_MODIFIER} + ((EXTRACT(EPOCH from created_at) - EXTRACT(EPOCH from (now() - interval '#{HOTTNESS_TIME_INTERVAL}' day))::integer) / #{HOTTNESS_TIME_WINDOW}) as hottness")
       .order('hottness DESC')
   end
 
