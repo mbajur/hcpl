@@ -1,6 +1,6 @@
 - @main_content_class = 'col-7'
 - @sidebar_class = 'col-3'
-- poster = @post.event.poster.present? ? @post.event.poster : @post.thumb
+- poster = @post.event.try(:poster).present? ? @post.event.poster : @post.thumb
 
 = content_for :content_body do
   - if poster.present?

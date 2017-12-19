@@ -92,7 +92,7 @@ class PostsController < ApplicationController
 
   def resync_post_event_data
     return false unless @post.media_type == 'facebook_event'
-    return false unless @post.event.can_be_synced?
+    return false unless @post.event.try(:can_be_synced?) || !@post.event.present?
 
     logger.debug 'Post has not been synced recently. Go!'
 

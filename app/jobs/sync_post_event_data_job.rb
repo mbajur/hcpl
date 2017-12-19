@@ -84,5 +84,8 @@ class SyncPostEventDataJob < ApplicationJob
         .lon(facebook_event_lon)
         .fetch
     end
+  rescue MultiJson::ParseError => e
+    logger.warn "Nominatim failed. Message: #{e.message}"
+    OpenStruct.new
   end
 end
