@@ -1,4 +1,7 @@
-# README
+# hcpl 
+[![CircleCI](https://circleci.com/gh/mbajur/hcpl.svg?style=svg)](https://circleci.com/gh/mbajur/hcpl)
+[![Maintainability](https://api.codeclimate.com/v1/badges/3de1644d43fa45c0abb0/maintainability)](https://codeclimate.com/github/mbajur/hcpl/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/3de1644d43fa45c0abb0/test_coverage)](https://codeclimate.com/github/mbajur/hcpl/test_coverage)
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
