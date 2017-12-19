@@ -48,13 +48,16 @@ jobs:
       - run: bundle exec rake db:create || true
       - run: bundle exec rake db:schema:load
 
-      # run tests!
       - run:
-          name: run tests
+          name: Setup Code Climate test-reporter
           command: |
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
             chmod +x ./cc-test-reporter
 
+      # run tests!
+      - run:
+          name: run tests
+          command: |
             mkdir /tmp/test-results
             TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
 
@@ -63,7 +66,8 @@ jobs:
                               --format RspecJunitFormatter \
                               --out /tmp/test-results/rspec.xml \
                               -- $(echo "${TEST_FILES}" | sed -e 's/\n/\\n/' -e 's/ /\ /')
-            ./cc-test-reporter after-build --exit-code $EXIT_CODE
+
+            ./cc-test-reporter after-build --exit-code $?
 
       - add_ssh_keys:
           fingerprints:
