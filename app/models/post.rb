@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
   include PgSearch
 
-  HOTTNESS_TIME_INTERVAL = 3
+  HOTTNESS_TIME_INTERVAL = 1
   HOTTNESS_COMMENTS_MODIFIER = 10
   HOTTNESS_TIME_WINDOW = 3.hour.to_i
 
