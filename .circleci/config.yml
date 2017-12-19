@@ -71,7 +71,7 @@ jobs:
               exit 0
             fi
             if [ -z "${BUNDLE_UPDATE}" ]; then
-              ./do-exclusively --branch master ./.circleci/deploy-circleci.sh
+              ./.circleci/do-exclusively --branch master ./.circleci/deploy-circleci.sh
             else
               gem install -N bundler circleci-bundle-update-pr
               circleci-bundle-update-pr CircleCI circleci@example.com
