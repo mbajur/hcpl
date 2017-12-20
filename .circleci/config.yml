@@ -99,6 +99,9 @@ jobs:
               circleci-bundle-update-pr CircleCI circleci@example.com
             fi
 
+      - store_artifacts:
+        path: /tmp/capybara
+
       # collect reports
       # - store_test_results:
       #     path: /tmp/test-results
