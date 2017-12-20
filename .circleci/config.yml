@@ -70,8 +70,6 @@ jobs:
       # run tests!
       - run:
           name: run tests
-          environment:
-            PATH: "${HOME}/${CIRCLE_PROJECT_REPONAME}/firefox:${PATH}"
           command: |
             mkdir /tmp/test-results
             TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
