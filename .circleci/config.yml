@@ -49,6 +49,16 @@ jobs:
       - run: bundle exec rake db:schema:load
 
       - run:
+        name: Install selenium
+        command: |
+          pip install mozdownload mozinstall
+          mozdownload --version latest --destination firefox.tar.bz2
+          mozinstall firefox.tar.bz2
+          wget -O geckodriver.tar.gz https://github.com/mozilla/geckodriver/releases/download/v0.18.0/geckodriver-v0.18.0-linux64.tar.gz
+          gunzip -c geckodriver.tar.gz | tar xopf -
+          chmod +x geckodriver && mv geckodriver /home/ubuntu/bin/
+
+      - run:
           name: Setup Code Climate test-reporter
           command: |
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
@@ -57,6 +67,8 @@ jobs:
       # run tests!
       - run:
           name: run tests
+          environment:
+            PATH: "${HOME}/${CIRCLE_PROJECT_REPONAME}/firefox:${PATH}"
           command: |
             mkdir /tmp/test-results
             TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
