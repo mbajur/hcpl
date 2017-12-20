@@ -33,6 +33,17 @@ jobs:
           - v1-dependencies-
 
       - run:
+          name: Install selenium
+          command: |
+            sudo apt-get install python-pip python-dev build-essential -y
+            pip install mozdownload mozinstall
+            mozdownload --version latest --destination firefox.tar.bz2
+            mozinstall firefox.tar.bz2
+            wget -O geckodriver.tar.gz https://github.com/mozilla/geckodriver/releases/download/v0.18.0/geckodriver-v0.18.0-linux64.tar.gz
+            gunzip -c geckodriver.tar.gz | tar xopf -
+            chmod +x geckodriver && mv geckodriver /home/ubuntu/bin/
+
+      - run:
           name: install dependencies
           command: |
             bundle install --jobs=4 --retry=3 --path vendor/bundle
@@ -47,17 +58,6 @@ jobs:
       # Database setup
       - run: bundle exec rake db:create || true
       - run: bundle exec rake db:schema:load
-
-      - run:
-          name: Install selenium
-          command: |
-            sudo apt-get install pip -y
-            pip install mozdownload mozinstall
-            mozdownload --version latest --destination firefox.tar.bz2
-            mozinstall firefox.tar.bz2
-            wget -O geckodriver.tar.gz https://github.com/mozilla/geckodriver/releases/download/v0.18.0/geckodriver-v0.18.0-linux64.tar.gz
-            gunzip -c geckodriver.tar.gz | tar xopf -
-            chmod +x geckodriver && mv geckodriver /home/ubuntu/bin/
 
       - run:
           name: Setup Code Climate test-reporter
