@@ -100,7 +100,7 @@ jobs:
             fi
 
       - store_artifacts:
-        path: /tmp/capybara
+          path: /tmp/capybara
 
       # collect reports
       # - store_test_results:
