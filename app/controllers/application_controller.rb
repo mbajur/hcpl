@@ -3,13 +3,22 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user_session, :current_user, :user_signed_in?
 
+  before_action :stub_user_id
   before_action :setup_rack_miniprofiler
 
-rescue_from Posts::Create::LinkNotUniqueError, with: :handle_posts_create_link_not_unique_error
+  rescue_from Posts::Create::LinkNotUniqueError, with: :handle_posts_create_link_not_unique_error
 
   def index; end
 
   private
+
+  def stub_user_id
+    return true unless Rails.env.test?
+    return true unless cookies[:stub_user_id].present?
+
+    user = User.find(cookies[:stub_user_id])
+    UserSession.new(user).save!
+  end
 
   def current_user_session
     return @current_user_session if defined?(@current_user_session)

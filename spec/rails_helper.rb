@@ -6,10 +6,22 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
+# require 'webmock/rspec'
 require 'support/factory_bot'
 require 'simplecov'
+require 'capybara/rspec'
+require 'selenium-webdriver'
+require 'capybara-screenshot/rspec'
+
+Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 SimpleCov.start
+
+Capybara.javascript_driver = :selenium
+
+Capybara::Screenshot.prune_strategy = :keep_last_run
+
+# WebMock.disable_net_connect!(allow_localhost: true)
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -31,6 +43,9 @@ SimpleCov.start
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+  config.include ShowMeTheCookies, :type => :feature
+  config.include SessionHelper
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 

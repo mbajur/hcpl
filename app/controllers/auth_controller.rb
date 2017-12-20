@@ -1,5 +1,7 @@
 class AuthController < ApplicationController
 
+  # before_action :stub_discourse_data
+
   def sign_in
     sso = SsoWithDiscourse::Sso.new
     sso.return_url = sign_in_comeback_url
@@ -53,6 +55,17 @@ class AuthController < ApplicationController
   def sign_out
     current_user_session.destroy
     redirect_to root_path, notice: 'Wylogowano pomyślnie!'
+  end
+
+  private
+
+  def stub_discourse_data
+    return true unless Rails.env.test?
+
+    user = User.find(cookies[:stub_user_id])
+    UserSession.new(user).save!
+
+    redirect_to root_path, notice: 'Zalogowano pomyślnie!'
   end
 
 end

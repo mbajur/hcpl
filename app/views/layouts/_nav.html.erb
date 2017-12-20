@@ -27,7 +27,7 @@
                 Wyloguj
               </a>
             <% else %>
-              <a class="nav-link" href="<%= sign_in_path %>" role="button">
+              <a class="nav-link sign-in-link" href="<%= sign_in_path %>" role="button">
                 Logowanie
               </a>
             <% end %>
@@ -35,11 +35,11 @@
         </ul>
 
         <div class="dropdown ml-md-3">
-          <a href="<%= new_post_path %>" class="btn btn-outline-light dropdown-toggle" data-toggle="dropdown">+ Dodaj</a>
+          <a href="<%= new_post_path %>" class="btn btn-outline-light dropdown-toggle add-post-dropdown-toggle" data-toggle="dropdown">+ Dodaj</a>
 
           <div class="dropdown-menu dropdown-menu-right">
-            <a href="<%= new_post_path %>" class="dropdown-item">Link lub tekst</a>
-            <a href="<%= new_event_path %>" class="dropdown-item">Wydarzenie</a>
+            <a href="<%= new_post_path %>" class="dropdown-item add-post-link">Link lub tekst</a>
+            <a href="<%= new_event_path %>" class="dropdown-item add-event-link">Wydarzenie</a>
           </div>
         </div>
       </div>

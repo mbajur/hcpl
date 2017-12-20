@@ -70,6 +70,11 @@ end
 
 group :test do
   gem 'simplecov', require: false
+  gem 'capybara'
+  gem 'capybara-screenshot'
+  gem 'selenium-webdriver'
+  gem 'show_me_the_cookies'
+  gem 'webmock'
 end
 
 group :development do
