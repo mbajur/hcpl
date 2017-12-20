@@ -51,7 +51,7 @@ jobs:
       - run:
           name: Install selenium
           command: |
-            apt-get install pip -y
+            sudo apt-get install pip -y
             pip install mozdownload mozinstall
             mozdownload --version latest --destination firefox.tar.bz2
             mozinstall firefox.tar.bz2
