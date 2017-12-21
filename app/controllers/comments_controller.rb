@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
 
     if @comment.valid?
       @comment.save
-      redirect_to @post.path, notice: 'Komentarz dodany pomyślnie!'
+      redirect_to url_for(@post.path, only_path: true), notice: 'Komentarz dodany pomyślnie!'
     else
       render 'posts/show'
     end

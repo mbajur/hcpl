@@ -3,6 +3,6 @@
 
 = content_for :content_body do
   ul.list-unstyled.posts-list
-    = render @posts
+    = render collection: @posts
 
   = paginate @posts
