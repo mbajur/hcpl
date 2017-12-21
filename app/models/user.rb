@@ -21,6 +21,10 @@ class User < ApplicationRecord
     increment!(:karma, count)
   end
 
+  def remove_karma(count = 1)
+    decrement!(:karma, count)
+  end
+
   def refresh_karma
     update_attribute(:karma, posts.sum(:votes_count))
   end

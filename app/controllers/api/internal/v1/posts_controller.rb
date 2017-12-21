@@ -11,14 +11,17 @@ class Api::Internal::V1::PostsController < Api::InternalController
     end
   end
 
+  # @todo: Move that to interactor
   def toggle_vote
     post = find_post
 
     if current_user.voted_for?(post)
       post.votes.where(user: current_user).destroy_all
+      post.user.remove_karma
       voted = false
     else
       post.votes.create!(user: current_user)
+      post.user.add_karma
       voted = true
     end
 

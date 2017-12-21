@@ -12,6 +12,8 @@ class ApplicationController < ActionController::Base
 
   private
 
+  # Based on:
+  # http://library.edgecase.com/oath-and-capybara
   def stub_user_id
     return true unless Rails.env.test?
     return true unless cookies[:stub_user_id].present?

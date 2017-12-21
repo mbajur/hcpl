@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :post do
-    title Faker::Lorem.sentence
+    sequence(:title) { Faker::Lorem.sentence }
 
     user
   end

@@ -2,7 +2,8 @@
 
 = content_for :sidebar do
   .text-center
-    = image_tag @user.avatar.thumb('200x200#').url, class: 'user-profile-avatar', size: '200x200'
+    - if @user.avatar.present?
+      = image_tag @user.avatar.thumb('200x200#').url, class: 'user-profile-avatar', size: '200x200'
 
     h1.h3.user-profile-username
       = title @user.username

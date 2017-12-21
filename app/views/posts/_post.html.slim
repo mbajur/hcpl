@@ -2,7 +2,7 @@
 - user = post.user.decorate
 - post_decorated = post.decorate
 
-li.posts-item
+li.posts-item(data-post-token=post.token)
   post-bookmark-btn(
     post-guid=post.token
     :bookmarked=post.user_bookmarked?(current_user).to_s
