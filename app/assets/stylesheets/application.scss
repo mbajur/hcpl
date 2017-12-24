@@ -117,6 +117,10 @@ $post-voted-color: #28a745;
 
 .navbar-brand {
   font-size: 1.45rem;
+
+  span {
+    font-size: 60%;
+  }
 }
 
 .navbar .navbar-nav li {
