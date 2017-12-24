@@ -56,7 +56,7 @@ class Post < ApplicationRecord
             EXTRACT(EPOCH from (now() - interval '#{HOTTNESS_TIME_INTERVAL}' day))::integer
           ) / #{HOTTNESS_TIME_WINDOW}
         ) + (
-          SELECT COALESCE(0, sum(tags.hottness_mod))
+          SELECT COALESCE(sum(tags.hottness_mod), 0)
           FROM tags
           INNER JOIN taggings
           on tags.id = taggings.tag_id

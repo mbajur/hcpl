@@ -2,7 +2,7 @@
 - user = post.user.decorate
 - post_decorated = post.decorate
 
-li.posts-item(data-post-token=post.token)
+li.posts-item(data-post-token=post.token data-hottness=post.try(:hottness))
   post-bookmark-btn(
     post-guid=post.token
     :bookmarked=post.user_bookmarked?(current_user).to_s
@@ -49,6 +49,7 @@ li.posts-item(data-post-token=post.token)
             li.list-inline-item.mr-3
               a(href=user.profile_path)
                 = post.user.username
+
                 sub.ml-1(title="Karma")
                   = post.user.karma
 

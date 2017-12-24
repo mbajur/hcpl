@@ -1,5 +1,5 @@
 <template lang="pug">
-  span
+  span(:title="dateTime")
     | {{ dateTime | moment("from", "now") }}
 </template>
 
