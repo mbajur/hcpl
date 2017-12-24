@@ -56,7 +56,7 @@ class Post < ApplicationRecord
             EXTRACT(EPOCH from (now() - interval '#{HOTTNESS_TIME_INTERVAL}' day))::integer
           ) / #{HOTTNESS_TIME_WINDOW}
         ) + (
-          SELECT sum(tags.hottness_mod)
+          SELECT COALESCE(0, sum(tags.hottness_mod))
           FROM tags
           INNER JOIN taggings
           on tags.id = taggings.tag_id
@@ -73,6 +73,10 @@ class Post < ApplicationRecord
     Post
       .select(sql)
       .order('hottness DESC')
+
+    # Post
+    #   .select("posts.*, votes_count + comments_count * #{HOTTNESS_COMMENTS_MODIFIER} + ((EXTRACT(EPOCH from created_at) - EXTRACT(EPOCH from (now() - interval '#{HOTTNESS_TIME_INTERVAL}' day))::integer) / #{HOTTNESS_TIME_WINDOW}) as hottness")
+    #   .order('hottness DESC')
   end
 
   def self.popular
