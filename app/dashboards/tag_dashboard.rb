@@ -14,6 +14,7 @@ class TagDashboard < Administrate::BaseDashboard
     taggings_count: Field::Number,
     is_primary: Field::Boolean,
     slug: Field::String,
+    hottness_mod: Field::Number,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -26,6 +27,7 @@ class TagDashboard < Administrate::BaseDashboard
     :id,
     :name,
     :taggings_count,
+    :hottness_mod,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -37,6 +39,7 @@ class TagDashboard < Administrate::BaseDashboard
     :taggings_count,
     :is_primary,
     :slug,
+    :hottness_mod
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -47,6 +50,7 @@ class TagDashboard < Administrate::BaseDashboard
     :name,
     :slug,
     :is_primary,
+    :hottness_mod
   ].freeze
 
   # Overwrite this method to customize how tags are displayed

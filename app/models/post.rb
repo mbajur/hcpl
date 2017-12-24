@@ -39,12 +39,39 @@ class Post < ApplicationRecord
   #     recentness = (seconds / divisor).to_i
   #
   #     pop = post.votes_count + post.comments_count
-  #     pop + recentness
+  #     mod = post.tags.sum(:hottness_mod)
+  #     pop + recentness + mod
   #   end
   #
   def self.hot
+    sql = <<-SQL.squish
+      posts.*,
+      (
+        /* Votes */
+        votes_count +
+        comments_count * #{HOTTNESS_COMMENTS_MODIFIER} +
+        (
+          (
+            EXTRACT(EPOCH from created_at) -
+            EXTRACT(EPOCH from (now() - interval '#{HOTTNESS_TIME_INTERVAL}' day))::integer
+          ) / #{HOTTNESS_TIME_WINDOW}
+        ) + (
+          SELECT sum(tags.hottness_mod)
+          FROM tags
+          INNER JOIN taggings
+          on tags.id = taggings.tag_id
+          WHERE
+            taggings.taggable_id = posts.id
+            AND
+            taggings.taggable_type = 'Post'
+            AND
+            taggings.context = 'tags'
+        )
+      ) as hottness
+    SQL
+
     Post
-      .select("posts.*, votes_count + comments_count * #{HOTTNESS_COMMENTS_MODIFIER} + ((EXTRACT(EPOCH from created_at) - EXTRACT(EPOCH from (now() - interval '#{HOTTNESS_TIME_INTERVAL}' day))::integer) / #{HOTTNESS_TIME_WINDOW}) as hottness")
+      .select(sql)
       .order('hottness DESC')
   end
 
