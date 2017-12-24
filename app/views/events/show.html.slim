@@ -2,6 +2,8 @@
 - @sidebar_class = 'col-3'
 - poster = @post.event.try(:poster).present? ? @post.event.poster : @post.thumb
 
+- set_meta_tags title: @post.title
+
 = content_for :content_body do
   - if poster.present?
     = image_tag poster.thumb('825x300#').url, width: '100%', height: '231'

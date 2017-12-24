@@ -1,6 +1,8 @@
+- set_meta_tags title: 'Nadchodzące wydarzenia'
+
 = content_for :before_content do
   - unless params[:q].present?
-    = render 'events/hot_widget'
+    = render 'events/hot_widget', force_show: true
 
 = content_for :content_nav do
   = render 'events/index_content_nav'

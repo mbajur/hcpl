@@ -1,3 +1,5 @@
+- set_meta_tags title: @post.title
+
 = content_for :content_body do
   ul.list-unstyled.posts-list
     - if @post.media_type == 'facebook_event'

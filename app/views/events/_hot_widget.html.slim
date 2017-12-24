@@ -1,9 +1,13 @@
 - cache('hot_events_widget', expires_in: 1.hour) do
+  - force_show = force_show == true
   - events = PostEvent \
               .includes(:post, post: [:votes, :user, :bookmarks]) \
-              .upcoming_hot \
               .upcoming_first \
               .limit(2)
+
+  / If force_show is enabled, show hot events from now to infinity, not jus from
+  / two weeks ahead.
+  - events = force_show ? events.upcoming_4_months.hot : events.upcoming_hot
 
   - col_class = events.length > 1 ? 'col-6' : 'col-12'
 
