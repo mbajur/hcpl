@@ -25,7 +25,9 @@ RSpec.describe Post, type: :model do
         @post2 = create(:post, title: '#1', created_at: DateTime.parse('15 Dec 2017 09:50:00'), votes_count: 1, tag_list: 'plhc')
       end
 
-      it { expect(subject).to eq [@post2.title, @post1.title] }
+      it 'orders posts properly' do
+        expect(subject).to eq [@post2.title, @post1.title]
+      end
     end
   end
 end

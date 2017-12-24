@@ -1,4 +1,5 @@
-- main_content_class = @main_content_class || 'col-9'
+/ - main_content_class = @main_content_class || 'col-9'
+- main_content_class = @main_content_class || 'col-12 col-md-9'
 - sidebar_class = @sidebar_class || 'col'
 
 html
@@ -31,7 +32,7 @@ html
 
 
           - unless @sidebar_disabled
-            .main-sidebar(data-js-sticky-sidebar class=sidebar_class)
+            .main-sidebar.d-none.d-md-block(data-js-sticky-sidebar class=sidebar_class)
               .main-sidebar__inner
                 - if content_for?(:sidebar)
                   = yield :sidebar
