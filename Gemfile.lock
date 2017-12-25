@@ -165,6 +165,7 @@ GEM
       faraday (~> 0.8)
     faraday_middleware (0.12.2)
       faraday (>= 0.7.4, < 1.0)
+    fast_blank (1.0.0)
     fastimage (2.1.0)
     ffi (1.9.18)
     ffi-compiler (1.0.1)
@@ -173,6 +174,7 @@ GEM
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     hashdiff (0.3.7)
+    htmlentities (4.3.4)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     i18n (0.9.1)
@@ -236,8 +238,10 @@ GEM
     minitest (5.10.3)
     momentjs-rails (2.17.1)
       railties (>= 3.1)
+    moneta (1.0.0)
     multi_json (1.12.2)
     multipart-post (2.0.0)
+    mustache (1.0.5)
     nesty (1.0.2)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
@@ -245,9 +249,19 @@ GEM
     nio4r (2.1.0)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
+    nokogumbo (1.4.13)
+      nokogiri
     nominatim (0.0.6)
       faraday
       multi_json
+    onebox (1.8.32)
+      fast_blank (>= 1.0.0)
+      htmlentities (~> 4.3)
+      moneta (~> 1.0)
+      multi_json (~> 1.11)
+      mustache
+      nokogiri (~> 1.7)
+      sanitize
     pg (0.21.0)
     pg_search (1.0.6)
       activerecord (>= 3.1)
@@ -319,6 +333,10 @@ GEM
     ruby_dep (1.5.0)
     rubyzip (1.2.1)
     safe_yaml (1.0.4)
+    sanitize (4.5.0)
+      crass (~> 1.0.2)
+      nokogiri (>= 1.4.4)
+      nokogumbo (~> 1.4.1)
     sass (3.5.3)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -441,6 +459,7 @@ DEPENDENCIES
   meta-tags
   metainspector
   nominatim
+  onebox
   pg (~> 0.18)
   pg_search
   postrank-uri
