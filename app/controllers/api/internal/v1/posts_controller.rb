@@ -11,6 +11,16 @@ class Api::Internal::V1::PostsController < Api::InternalController
     end
   end
 
+  def onebox_link
+    outcome = OneboxLink.run! params
+
+    if outcome.valid?
+      render json: outcome.result
+    else
+      render json: { errors: outcome.errors }, status: :bad_request
+    end
+  end
+
   # @todo: Move that to interactor
   def toggle_vote
     post = find_post
