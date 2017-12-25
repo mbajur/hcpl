@@ -1,0 +1,12 @@
+<%= display_meta_tags site: 'hard|core.pl', reverse: true %>
+<%= csrf_meta_tags %>
+
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<%# javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+<%= javascript_pack_tag 'mobile' %>
+<%= stylesheet_pack_tag 'mobile' %>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<%= render 'layouts/analytics' %>
