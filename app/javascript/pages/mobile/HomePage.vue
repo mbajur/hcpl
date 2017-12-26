@@ -1,8 +1,19 @@
 <template lang="pug">
   div
-    p Homepage
+    .vux-demo
+      h1 {{ msg }}
+
+    group(title="cell demo")
+      cell(title="VUX" value="cool" is-link)
 </template>
 
 <script>
-export default {}
+import { Group, Cell } from 'vux'
+
+export default {
+  components: {
+    Group,
+    Cell
+  },
+}
 </script>

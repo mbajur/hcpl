@@ -7,12 +7,18 @@
 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Vux from 'vux'
+import Vuex from 'vuex'
 
 import MobileApp from '../MobileApp.vue'
 import HomePage from '../pages/mobile/HomePage.vue'
 // import PostVoteBtn from '../components/PostVoteBtn.vue'
 
 Vue.use(VueRouter)
+// Vue.use(Vuex)
+
+// Vux components
+// Vue.component('vux-header', Vux.XHeader)
 
 const routes = [{
   path: '/',
@@ -30,61 +36,3 @@ document.addEventListener('DOMContentLoaded', () => {
     render: h => h(MobileApp)
   }).$mount('#app')
 })
-
-
-// The above code uses Vue without the compiler, which means you cannot
-// use Vue to target elements in your existing html templates. You would
-// need to always use single file components.
-// To be able to target elements in your existing html/erb templates,
-// comment out the above code and uncomment the below
-// Add <%= javascript_pack_tag 'hello_vue' %> to your layout
-// Then add this markup to your html template:
-//
-// <div id='hello'>
-//   {{message}}
-//   <app></app>
-// </div>
-
-
-// import Vue from 'vue/dist/vue.esm'
-// import VueResource from 'vue-resource'
-// import VueEventHub from 'vue-event-hub'
-
-// import 'moment/locale/pl'
-// import VueMoment from 'vue-moment'
-
-// import PostVoteBtn from '../components/PostVoteBtn.vue'
-// import PostBookmarkBtn from '../components/PostBookmarkBtn.vue'
-// import PostPreviewMediaBtn from '../components/PostPreviewMediaBtn.vue'
-// import PostPreviewMedia from '../components/PostPreviewMedia.vue'
-// import NewPostForm from '../components/NewPostForm.vue'
-// import HumanDateTime from '../components/HumanDateTime.vue'
-// import EventBeginningAt from '../components/EventBeginningAt.vue'
-
-// Vue.use(VueResource)
-// Vue.use(VueEventHub)
-// Vue.use(VueMoment)
-
-// Vue-resource settings
-// Vue.http.options.root = '/'
-// Vue.http.interceptors.push(function(request, next) {
-//   request.headers.set('X-CSRF-TOKEN', $('[name="csrf-token"]').attr('content'))
-//   next()
-// })
-
-// Initialize
-
-// document.addEventListener('DOMContentLoaded', () => {
-//   const app = new Vue({
-//     el: '#app',
-//     components: {
-//       // PostVoteBtn,
-//       // PostBookmarkBtn,
-//       // PostPreviewMediaBtn,
-//       // PostPreviewMedia,
-//       // NewPostForm,
-//       // HumanDateTime,
-//       // EventBeginningAt
-//     }
-//   })
-// })
