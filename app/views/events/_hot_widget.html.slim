@@ -17,7 +17,7 @@
 
       .row.no-gutters
         - events.each do |event|
-          - thumb_size = events.length > 1 ? '397x225#' : '793x225#'
+          - thumb_size = events.length > 1 ? '397x225#n' : '793x225#n'
 
           div(class=col_class)
             .card(style="background-image: url(#{event.post.thumb.thumb(thumb_size).url})")
