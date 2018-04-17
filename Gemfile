@@ -48,6 +48,7 @@ gem 'koala'
 gem 'meta-tags'
 gem 'metainspector'
 gem 'nominatim'
+gem 'onebox'
 gem 'pg_search'
 gem 'postrank-uri' # clear links
 gem 'rack-mini-profiler'
