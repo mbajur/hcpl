@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get '(*path)', to: 'mobile#index',
+    constraints: lambda { |req| req.params.key? :mobile }
+
   namespace :admin do
     resources :tags
     resources :users
@@ -46,6 +49,7 @@ Rails.application.routes.draw do
           post ':token/toggle_vote', action: :toggle_vote
           post ':token/toggle_bookmark', action: :toggle_bookmark
           post :fetch_title, on: :collection
+          post :onebox_link, on: :collection
         end
       end
     end
